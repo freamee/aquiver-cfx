@@ -1,0 +1,45 @@
+{
+	"name": "aquiver-cfx",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"dependencies": {
+		"@types/lodash": "^4.17.16",
+		"@types/node": "^22.13.13",
+		"@types/three": "^0.174.0",
+		"lodash": "^4.17.21",
+		"lodash-decorators": "^6.0.1",
+		"three": "^0.174.0",
+		"typescript": "^5.8.2"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^5.1.1",
+		"@rollup/plugin-commonjs": "^28.0.3",
+		"@rollup/plugin-node-resolve": "^16.0.1",
+		"@rollup/plugin-typescript": "^12.1.2",
+		"esbuild": "^0.25.1",
+		"lerna": "^8.1.8",
+		"rollup": "^4.37.0"
+	},
+	"prettier": {
+		"$schema": "http://json.schemastore.org/prettierrc",
+		"endOfLine": "lf",
+		"printWidth": 100,
+		"quoteProps": "as-needed",
+		"semi": true,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "none",
+		"useTabs": true,
+		"overrides": [
+			{
+				"files": "*.yml",
+				"options": {
+					"tabWidth": 2,
+					"useTabs": false
+				}
+			}
+		]
+	}
+}

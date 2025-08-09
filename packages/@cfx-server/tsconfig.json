@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"moduleResolution": "node",
+		"strict": true,
+		"pretty": true,
+		"declaration": true,
+		"noUncheckedIndexedAccess": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"allowSyntheticDefaultImports": true,
+		"strictPropertyInitialization": false,
+		"isolatedModules": false,
+		"forceConsistentCasingInFileNames": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noImplicitReturns": false,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"types": ["@citizenfx/server", "@types/node"],
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"outDir": "./dist"
+	},
+	"include": ["src/**/*.ts"]
+}

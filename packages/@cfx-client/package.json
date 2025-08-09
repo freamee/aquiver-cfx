@@ -1,0 +1,25 @@
+{
+	"name": "@aquiver-cfx/client",
+	"version": "1.0.0",
+	"type": "module",
+	"author": "freamee",
+	"license": "MIT",
+	"description": "",
+	"keywords": [
+		"fivem",
+		"wrapper",
+		"javascript",
+		"typescript",
+		"citizenfx"
+	],
+	"main": "dist/index.js",
+	"types": "dist/types/index.d.ts",
+	"scripts": {
+		"tsc": "tsc",
+		"watch": "tsc --watch"
+	},
+	"dependencies": {
+		"@citizenfx/client": "^2.0.18214-1",
+		"three": "^0.179.1"
+	}
+}
