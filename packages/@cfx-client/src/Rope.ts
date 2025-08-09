@@ -1,5 +1,6 @@
 import { Vector3 } from 'three';
 import { NetEntity } from './NetEntity';
+import { waitFor } from '@aquiver-cfx/shared';
 
 /** RopeTextures needs to be loaded, before creating the entity. */
 export class Rope {
@@ -52,38 +53,20 @@ export class Rope {
 	}
 
 	get length() {
-		return this._length;
+		return GetRopeLength(this._scriptID);
 	}
 
 	set length(length: number) {
 		RopeForceLength(this._scriptID, length);
 	}
 
-	get type() {
-		return this._type;
-	}
-
-	get maxLength() {
-		return this._maxLength;
-	}
-
-	get minLength() {
-		return this._minLength;
-	}
-
-	get windingSpeed() {
-		return this._windingSpeed;
-	}
-
-	get shadowEnabled() {
-		return this._shadowEnabled;
-	}
-
 	set shadowEnabled(state: boolean) {
 		// @ts-ignore
 		RopeDrawShadowEnabled(this._scriptID, state);
+	}
 
-		this._shadowEnabled = state;
+	detachEntity(entity: NetEntity) {
+		DetachRopeFromEntity(this._scriptID, entity.scriptID);
 	}
 
 	activatePhysics(): void {

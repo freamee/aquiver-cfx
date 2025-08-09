@@ -14,6 +14,25 @@ export class NetPlayer extends NetEntity {
 		return this.localPlayer;
 	}
 
+	static getBySource(source: number | string) {
+		return new NetPlayer(source);
+	}
+
+	static getByScriptId(id: number) {
+		const playerIndex = NetworkGetPlayerIndexFromPed(id);
+		const targetSource = GetPlayerServerId(playerIndex);
+
+		return new NetPlayer(targetSource);
+	}
+
+	static getByNetId(id: number) {
+		const entity = NetworkGetEntityFromNetworkId(id);
+		const playerIndex = NetworkGetPlayerIndexFromPed(entity);
+		const targetSource = GetPlayerServerId(playerIndex);
+
+		return new NetPlayer(targetSource);
+	}
+
 	private _source: number | string;
 
 	protected _stateBag: StateBagInterface;

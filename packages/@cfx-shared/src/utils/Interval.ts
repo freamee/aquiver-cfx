@@ -1,5 +1,5 @@
 export class Interval {
-	private _interval: NodeJS.Timer | null = null;
+	private _interval: NodeJS.Timeout | null = null;
 
 	private _callback: () => void;
 
