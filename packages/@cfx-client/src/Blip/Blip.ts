@@ -8,6 +8,10 @@ export abstract class Blip extends WorldObject {
 		return [...this.entities.values()];
 	}
 
+	static getById(id: number) {
+		return this.entities.get(id);
+	}
+
 	protected constructor(private _scriptID: number) {
 		super(new Vector3());
 
