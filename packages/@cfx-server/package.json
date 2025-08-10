@@ -19,7 +19,7 @@
 		"watch": "tsc --watch"
 	},
 	"dependencies": {
-		"@aquiver-cfx/shared": "*",
+		"@aquiver-cfx/shared": "^1.0.0",
 		"@citizenfx/server": "^2.0.13796-1",
 		"three": "^0.179.1"
 	}
