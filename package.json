@@ -1,9 +1,19 @@
 {
 	"name": "aquiver-cfx",
-	"private": true,
+	"private": false,
+	"author": "freamee",
+	"license": "ISC",
 	"workspaces": [
 		"packages/*"
 	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/freamee/aquiver-cfx.git"
+	},
+	"bugs": {
+		"url": "https://github.com/freamee/aquiver-cfx/issues"
+	},
+	"homepage": "https://github.com/freamee/aquiver-cfx#readme",
 	"dependencies": {
 		"@types/lodash": "^4.17.16",
 		"@types/node": "^22.13.13",
