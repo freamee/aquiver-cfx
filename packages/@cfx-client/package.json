@@ -1,6 +1,6 @@
 {
 	"name": "@aquiver-cfx/client",
-	"version": "1.0.1-alpha.2",
+	"version": "1.0.1-alpha.3",
 	"author": "freamee",
 	"license": "ISC",
 	"description": "",
@@ -25,7 +25,7 @@
 		"watch": "tsc --watch"
 	},
 	"dependencies": {
-		"@aquiver-cfx/shared": "^1.0.1-alpha.2",
+		"@aquiver-cfx/shared": "^1.0.1-alpha.3",
 		"@citizenfx/client": "^2.0.18214-1"
 	},
 	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed"
