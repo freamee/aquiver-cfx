@@ -1,4 +1,11 @@
-export * as Utils from './utils';
+import { MultiplayerManager } from './Multiplayer';
+
 export * from './Blip';
 export * from './Colshape';
-export * from './Marker';
+export { Label } from './Label';
+export { Marker } from './Marker';
+export * as Utils from './utils';
+
+const mp = new MultiplayerManager();
+
+export default mp;

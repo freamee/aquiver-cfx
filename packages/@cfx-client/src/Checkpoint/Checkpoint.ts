@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { CircleColshape } from '../Colshape/CircleColshape';
 import { Vector3 } from 'three';
+import { RGBA } from '@aquiver-cfx/shared';
 
 interface iOptions {
 	destination: Vector3;

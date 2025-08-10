@@ -3,8 +3,8 @@ import { WorldObject } from '@/WorldObject';
 import { RGBA } from '@aquiver-cfx/shared';
 import { Vector3 } from 'three';
 
-export class Marker extends WorldObject {
-	private static _entities = new Map<number, Marker>();
+export class Label extends WorldObject {
+	private static _entities = new Map<number, Label>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {
@@ -15,43 +15,39 @@ export class Marker extends WorldObject {
 		return this._entities.get(id);
 	}
 
-	public markerType: number = 0;
+	public text: string = '';
+	public scale: number = 1.0;
 	public color: RGBA = RGBA.white;
-	public scale: Vector3 = new Vector3(1, 1, 1);
-	public rotation: Vector3 = new Vector3(0, 0, 0);
-	public direction: Vector3 = new Vector3(0, 0, 0);
-	public faceCamera: boolean = false;
-	public rotate: boolean = false;
-	public bobUpAndDown: boolean = false;
+	public center: boolean = true;
 
 	private _useStreaming: boolean = false;
 	private _streamingDistance: number = -1;
 
 	constructor(
-		type: number,
+		text: string,
 		position: Vector3,
 		color: RGBA = RGBA.white,
 		useStreaming: boolean = true,
-		streamingDistance: number = 128
+		streamingDistance: number = 32
 	) {
 		super(position);
 
-		this.markerType = type;
+		this.text = text;
 		this.color = color;
 
 		this._useStreaming = useStreaming;
 		this._streamingDistance = streamingDistance;
 
 		if (this._useStreaming) {
-			Marker._group.addPool(this);
+			Label._group.addPool(this);
 		}
 
-		Marker._entities.set(this.id, this);
+		Label._entities.set(this.id, this);
 	}
 
 	get isStreamed() {
 		if (this._useStreaming) {
-			return Marker._group.isStreamedIn(this);
+			return Label._group.isStreamedIn(this);
 		}
 
 		return true;
@@ -68,10 +64,10 @@ export class Marker extends WorldObject {
 	destroy(): void {
 		super.destroy();
 
-		Marker._entities.delete(this.id);
+		Label._entities.delete(this.id);
 
 		if (this._useStreaming) {
-			Marker._group.removePool(this);
+			Label._group.removePool(this);
 		}
 	}
 }
