@@ -13,6 +13,10 @@
 	"bugs": {
 		"url": "https://github.com/freamee/aquiver-cfx/issues"
 	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
 	"homepage": "https://github.com/freamee/aquiver-cfx#readme",
 	"dependencies": {
 		"@types/lodash": "^4.17.16",
