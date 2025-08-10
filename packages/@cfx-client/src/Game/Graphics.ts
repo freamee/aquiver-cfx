@@ -1,6 +1,5 @@
-import { RGBA } from '@aquiver-cfx/shared';
+import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
-import { Vector2, Vector3 } from 'three';
 
 export abstract class Graphics {
 	static drawRectangleBar3D(

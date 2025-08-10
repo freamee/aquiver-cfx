@@ -1,4 +1,4 @@
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
 export declare abstract class Game {
     static hash(input: string): number;
     static get language(): number;

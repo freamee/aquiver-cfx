@@ -17,6 +17,9 @@
 	],
 	"main": "dist/index.js",
 	"types": "dist/types/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"tsc": "tsc",
 		"watch": "tsc --watch"

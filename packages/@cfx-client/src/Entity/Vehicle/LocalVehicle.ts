@@ -1,6 +1,6 @@
-import { Vector3 } from 'three';
 import { NetVehicle } from './NetVehicle';
-import { StreamingGroup } from './StreamingGroup';
+import { StreamingGroup } from '../../GameObject';
+import { Vector3 } from '@aquiver-cfx/shared';
 
 /** Vehicle model needs to be loaded before creating the entity. */
 export class LocalVehicle extends NetVehicle {

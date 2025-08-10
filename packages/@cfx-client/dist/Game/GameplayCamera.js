@@ -1,4 +1,4 @@
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
 export class GameplayCamera {
     static get position() {
         const [x, y, z] = GetGameplayCamCoord();

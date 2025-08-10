@@ -1,5 +1,4 @@
-import { RGBA } from '@aquiver-cfx/shared';
-import { Vector2, Vector3 } from 'three';
+import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 export declare abstract class Graphics {
     static drawRectangleBar3D(position: Vector3, percentage: number, width?: number, height?: number, border?: number, color?: RGBA, text?: string): void;
     /**

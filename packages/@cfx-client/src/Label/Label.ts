@@ -1,7 +1,5 @@
-import { StreamingGroup } from '@/StreamingGroup';
-import { WorldObject } from '@/WorldObject';
-import { RGBA } from '@aquiver-cfx/shared';
-import { Vector3 } from 'three';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
+import { StreamingGroup, WorldObject } from '../GameObject';
 
 export class Label extends WorldObject {
 	private static _entities = new Map<number, Label>();

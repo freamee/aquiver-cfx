@@ -1,5 +1,4 @@
-import { Vector3 } from 'three';
-import { RGBA } from '@aquiver-cfx/shared';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { Label } from './Label';
 
 export class LabelsManager {

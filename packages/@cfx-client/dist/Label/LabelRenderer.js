@@ -1,5 +1,5 @@
-import { Graphics } from '@/Game';
-import { Tick } from '@/utils';
+import { Graphics } from '../Game';
+import { Tick } from '../utils';
 import { Label } from './Label';
 export class LabelRenderer {
     _tick;

@@ -1,10 +1,10 @@
-import { Vector3 } from 'three';
-import { NetProp } from './NetProp';
-import { StreamingGroup } from './StreamingGroup';
+import { NetPed } from './NetPed';
+import { StreamingGroup } from '../../GameObject';
+import { Vector3 } from '@aquiver-cfx/shared';
 
 /** Model needs to be loaded before creating the entity. */
-export class LocalProp extends NetProp {
-	private static _entities = new Map<number, LocalProp>();
+export class LocalPed extends NetPed {
+	private static _entities = new Map<number, LocalPed>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {
@@ -17,29 +17,25 @@ export class LocalProp extends NetProp {
 	constructor(
 		modelHash: string | number,
 		position: Vector3,
-		rotation: Vector3 = new Vector3(),
+		heading: number = 0,
 		useStreaming: boolean = true,
 		streamingDistance: number = 128
 	) {
-		super(
-			CreateObjectNoOffset(modelHash, position.x, position.y, position.z, false, true, false)
-		);
-
-		this.rotation = rotation;
+		super(CreatePed(0, modelHash, position.x, position.y, position.z, heading, false, true));
 
 		this._useStreaming = useStreaming;
 		this._streamingDistance = streamingDistance;
 
 		if (this._useStreaming) {
-			LocalProp._group.addPool(this);
+			LocalPed._group.addPool(this);
 		}
 
-		LocalProp._entities.set(this.id, this);
+		LocalPed._entities.set(this.id, this);
 	}
 
 	get isStreamed() {
 		if (this._useStreaming) {
-			return LocalProp._group.isStreamedIn(this);
+			return LocalPed._group.isStreamedIn(this);
 		}
 
 		return true;
@@ -57,11 +53,11 @@ export class LocalProp extends NetProp {
 		super.destroy();
 
 		if (this._useStreaming) {
-			LocalProp._group.removePool(this);
+			LocalPed._group.removePool(this);
 		}
 
-		LocalProp._entities.delete(this.id);
+		LocalPed._entities.delete(this.id);
 
-		DeleteObject(this.scriptID);
+		DeletePed(this.scriptID);
 	}
 }

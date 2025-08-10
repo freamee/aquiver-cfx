@@ -1,5 +1,5 @@
-import { Vector3 } from 'three';
-import { WorldObject } from '../WorldObject';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { WorldObject } from '../GameObject';
 export declare abstract class Blip extends WorldObject {
     private _scriptID;
     protected static entities: Map<number, Blip>;

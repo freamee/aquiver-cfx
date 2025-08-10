@@ -1,4 +1,4 @@
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Blip } from './Blip';
 export declare class BlipsManager {
     at(id: number): Blip | undefined;

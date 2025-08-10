@@ -1,4 +1,4 @@
-import { NetEntity } from './NetEntity';
+import { NetEntity } from '../NetEntity';
 
 export class NetPlayer extends NetEntity {
 	private static localPlayer: NetPlayer;

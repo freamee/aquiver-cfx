@@ -1,6 +1,5 @@
-import { StreamingGroup } from '@/StreamingGroup';
-import { WorldObject } from '@/WorldObject';
 import { RGBA } from '@aquiver-cfx/shared';
+import { StreamingGroup, WorldObject } from '../GameObject';
 export class Label extends WorldObject {
     static _entities = new Map();
     static _group = new StreamingGroup(64);

@@ -1,5 +1,5 @@
-import { Graphics } from '@/Game';
-import { Tick } from '@/utils';
+import { Graphics } from '../Game';
+import { Tick } from '../utils';
 import { Marker } from './Marker';
 
 export class MarkerRenderer {

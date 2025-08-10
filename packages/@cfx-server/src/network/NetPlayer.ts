@@ -30,5 +30,7 @@ export class NetPlayer extends NetEntity {
 
 	set dimension(dimension: number) {
 		SetPlayerRoutingBucket(this.playerSrc, dimension);
+
+		this.setStateBag('PLAYER_DIMENSION', dimension, true);
 	}
 }

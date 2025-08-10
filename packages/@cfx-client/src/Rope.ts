@@ -1,6 +1,5 @@
-import { Vector3 } from 'three';
-import { NetEntity } from './NetEntity';
-import { waitFor } from '@aquiver-cfx/shared';
+import { Vector3, waitFor } from '@aquiver-cfx/shared';
+import { NetEntity } from './Entity';
 
 /** RopeTextures needs to be loaded, before creating the entity. */
 export class Rope {

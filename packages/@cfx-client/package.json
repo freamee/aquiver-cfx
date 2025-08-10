@@ -16,15 +16,17 @@
 		"citizenfx"
 	],
 	"main": "dist/index.js",
-	"types": "dist/types/index.d.ts",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"tsc": "tsc",
 		"watch": "tsc --watch"
 	},
 	"dependencies": {
 		"@aquiver-cfx/shared": "^1.0.1-alpha.2",
-		"@citizenfx/client": "^2.0.18214-1",
-		"three": "^0.179.1"
+		"@citizenfx/client": "^2.0.18214-1"
 	},
 	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed"
 }

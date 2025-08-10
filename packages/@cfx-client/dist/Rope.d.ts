@@ -1,5 +1,5 @@
-import { Vector3 } from 'three';
-import { NetEntity } from './NetEntity';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { NetEntity } from './Entity';
 /** RopeTextures needs to be loaded, before creating the entity. */
 export declare class Rope {
     private _scriptID;

@@ -1,4 +1,4 @@
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
 export class Game {
     static hash(input) {
         return GetHashKey(input);

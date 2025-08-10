@@ -1,27 +1,22 @@
-import { WorldObject } from '../WorldObject';
-import { NetPlayer } from '@/NetPlayer';
+import { WorldObject } from '../GameObject';
+import { NetPlayer } from '../Entity';
 export class Colshape extends WorldObject {
     static entities = new Map();
     static get all() {
         return [...this.entities.values()];
+    }
+    static getById(id) {
+        return this.entities.get(id);
     }
     constructor(position) {
         super(position);
         Colshape.entities.set(this.id, this);
     }
     onEnter() {
-        // EventManager.emit('enterColshape', this);
-        //
-        // if (this.isRemote) {
-        // 	emitNet('enterColshape', this.remoteID);
-        // }
+        emit('enterColshape', this.id);
     }
     onLeave() {
-        // 		EventManager.emit('leaveColshape', this);
-        //
-        // 		if (this.isRemote) {
-        // 			emitNet('leaveColshape', this.remoteID);
-        // 		}
+        emit('leaveColshape', this.id);
     }
     destroy() {
         if (lastColshapes.has(this.id)) {
@@ -35,26 +30,26 @@ export class Colshape extends WorldObject {
 const lastColshapes = new Set();
 setInterval(() => {
     const local = NetPlayer.local;
-    const currentStreamedIds = new Set();
-    // for (const entity of Colshape.streamedIn) {
-    // 	currentStreamedIds.add(entity.id);
-    // 	const isInside = entity.isEntityIn(local);
-    // 	if (isInside && !lastColshapes.has(entity.id)) {
-    // 		lastColshapes.add(entity.id);
-    // 		entity.onEnter();
-    // 	}
-    // 	if (!isInside && lastColshapes.has(entity.id)) {
-    // 		lastColshapes.delete(entity.id);
-    // 		entity.onLeave();
-    // 	}
-    // }
-    // for (const id of lastColshapes) {
-    // 	if (!currentStreamedIds.has(id)) {
-    // 		const entity = Colshape.all.find((e) => e.id === id);
-    // 		if (entity) {
-    // 			entity.onLeave();
-    // 		}
-    // 		lastColshapes.delete(id);
-    // 	}
-    // }
+    const currentlyStreamed = new Set();
+    for (const entity of Colshape.all) {
+        currentlyStreamed.add(entity.id);
+        const isInside = entity.isEntityIn(local);
+        if (isInside && !lastColshapes.has(entity.id)) {
+            lastColshapes.add(entity.id);
+            entity.onEnter();
+        }
+        if (!isInside && lastColshapes.has(entity.id)) {
+            lastColshapes.delete(entity.id);
+            entity.onLeave();
+        }
+    }
+    for (const id of lastColshapes) {
+        if (currentlyStreamed.has(id))
+            continue;
+        const entity = Colshape.getById(id);
+        if (entity) {
+            entity.onLeave();
+        }
+        lastColshapes.delete(id);
+    }
 }, 500);

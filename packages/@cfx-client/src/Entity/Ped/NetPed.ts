@@ -1,4 +1,4 @@
-import { NetEntity } from './NetEntity';
+import { NetEntity } from '../NetEntity';
 
 export class NetPed extends NetEntity {
 	static getByScriptId(id: number) {

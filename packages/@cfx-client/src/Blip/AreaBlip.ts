@@ -1,5 +1,5 @@
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Blip } from './Blip';
-import { Vector3 } from 'three';
 
 export class AreaBlip extends Blip {
 	static create(position: Vector3, width: number, height: number) {

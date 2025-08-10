@@ -1,6 +1,5 @@
 import { CircleColshape } from '../Colshape/CircleColshape';
-import { Vector3 } from 'three';
-import { RGBA } from '@aquiver-cfx/shared';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 interface iOptions {
     destination: Vector3;
     color: RGBA;

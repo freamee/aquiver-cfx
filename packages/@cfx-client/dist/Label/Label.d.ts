@@ -1,6 +1,5 @@
-import { WorldObject } from '@/WorldObject';
-import { RGBA } from '@aquiver-cfx/shared';
-import { Vector3 } from 'three';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
+import { WorldObject } from '../GameObject';
 export declare class Label extends WorldObject {
     private static _entities;
     private static _group;

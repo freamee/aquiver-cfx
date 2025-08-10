@@ -1,5 +1,5 @@
-import { Quaternion, Vector3 } from 'three';
-import { WorldObject } from './WorldObject';
+import { Quaternion, Vector3 } from '@aquiver-cfx/shared';
+import { WorldObject } from '../GameObject';
 
 export abstract class NetEntity extends WorldObject {
 	abstract get scriptID(): number;

@@ -1,5 +1,5 @@
-import { Vector3 } from 'three';
-import { WorldObject } from '../WorldObject';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { WorldObject } from '../GameObject';
 export class Blip extends WorldObject {
     _scriptID;
     static entities = new Map();

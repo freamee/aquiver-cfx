@@ -1,5 +1,5 @@
+import { NetPlayer } from '../Entity';
 import { BaseObject } from './BaseObject';
-import { NetPlayer } from './NetPlayer';
 import { WorldObject } from './WorldObject';
 
 export class StreamingGroup extends BaseObject {

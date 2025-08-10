@@ -1,6 +1,5 @@
-import { RGBA } from '@aquiver-cfx/shared';
+import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
-import { Vector2, Vector3 } from 'three';
 export class Graphics {
     static drawRectangleBar3D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = new RGBA(0, 130, 153, 155), text = '') {
         const { result, screenPosition } = this.getScreenFromWorld(position);

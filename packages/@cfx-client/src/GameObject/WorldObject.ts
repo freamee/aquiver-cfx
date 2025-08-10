@@ -1,5 +1,5 @@
+import { Vector3 } from '@aquiver-cfx/shared';
 import { BaseObject } from './BaseObject';
-import { Vector3 } from 'three';
 
 export abstract class WorldObject extends BaseObject {
 	protected static override entities = new Map<number, WorldObject>();

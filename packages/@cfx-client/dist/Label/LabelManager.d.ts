@@ -1,5 +1,4 @@
-import { Vector3 } from 'three';
-import { RGBA } from '@aquiver-cfx/shared';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { Label } from './Label';
 export declare class LabelsManager {
     new(text: string, position: Vector3, color?: RGBA, useStreaming?: boolean, streamingDistance?: number): Label;

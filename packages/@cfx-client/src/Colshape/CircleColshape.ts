@@ -1,6 +1,6 @@
-import { NetEntity } from '@/NetEntity';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { NetEntity } from '../Entity';
 import { Colshape } from './Colshape';
-import { Vector3 } from 'three';
 
 export class CircleColshape extends Colshape {
 	private _radius: number = 0;
