@@ -1,4 +1,4 @@
-import { altShared } from '@aquiver-alt/shared';
+import { waitFor } from '@aquiver-cfx/shared';
 
 export async function requestModel(model: string | number, timeout: number = 5000): Promise<void> {
 	const modelHash = typeof model === 'string' ? GetHashKey(model) : model;
@@ -6,7 +6,7 @@ export async function requestModel(model: string | number, timeout: number = 500
 	RequestModel(modelHash);
 
 	try {
-		await altShared.waitFor(() => HasModelLoaded(modelHash), timeout, 10);
+		await waitFor(() => HasModelLoaded(modelHash), timeout, 10);
 	} catch (error) {
 		throw new Error(`Failed to load model: ${model}`);
 	}

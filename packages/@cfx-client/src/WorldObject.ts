@@ -34,6 +34,10 @@ export abstract class WorldObject extends BaseObject {
 		return this.distanceTo(position) <= distance;
 	}
 
+	get streamingDistance() {
+		return -1;
+	}
+
 	get position() {
 		return this._position;
 	}

@@ -1,0 +1,32 @@
+import { Vector3 } from 'three';
+import { WorldObject } from '../WorldObject';
+export declare abstract class Blip extends WorldObject {
+    private _scriptID;
+    protected static entities: Map<number, Blip>;
+    static get all(): Blip[];
+    static getById(id: number): Blip | undefined;
+    protected constructor(_scriptID: number);
+    get isValid(): boolean;
+    get scriptID(): number;
+    set name(name: string);
+    get position(): Vector3;
+    set position(pos: Vector3);
+    set rotation(rot: number);
+    get rotation(): number;
+    get alpha(): number;
+    set alpha(alpha: number);
+    get color(): number;
+    set color(color: number);
+    get sprite(): number;
+    set sprite(sprite: number);
+    set scale(scale: number);
+    set display(display: number);
+    set category(category: number);
+    get isFlashing(): boolean;
+    set isFlashing(flashing: boolean);
+    get isShortRange(): boolean;
+    set isShortRange(shortRange: boolean);
+    set isRoute(state: boolean);
+    set routeColor(color: number);
+    destroy(): void;
+}

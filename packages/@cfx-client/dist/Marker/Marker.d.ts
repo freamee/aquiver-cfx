@@ -1,0 +1,24 @@
+import { WorldObject } from '@/WorldObject';
+import { RGBA } from '@aquiver-cfx/shared';
+import { Vector3 } from 'three';
+export declare class Marker extends WorldObject {
+    private static _entities;
+    private static _group;
+    static get all(): Marker[];
+    static getById(id: number): Marker | undefined;
+    markerType: number;
+    color: RGBA;
+    scale: Vector3;
+    rotation: Vector3;
+    direction: Vector3;
+    faceCamera: boolean;
+    rotate: boolean;
+    bobUpAndDown: boolean;
+    private _useStreaming;
+    private _streamingDistance;
+    constructor(type: number, position: Vector3, color?: RGBA, useStreaming?: boolean, streamingDistance?: number);
+    get isStreamed(): boolean;
+    get useStreaming(): boolean;
+    get streamingDistance(): number;
+    destroy(): void;
+}

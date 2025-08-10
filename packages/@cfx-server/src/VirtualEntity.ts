@@ -1,7 +1,7 @@
-import { altShared } from '@aquiver-alt/shared';
-import { WorldObject } from './WorldObject';
-import { StreamingGroup } from './StreamingGroup';
+import { Vector3 } from 'three';
 import { BaseMeta } from './Meta';
+import { StreamingGroup } from './StreamingGroup';
+import { WorldObject } from './WorldObject';
 
 class StreamMeta extends BaseMeta {
 	constructor(private entity: VirtualEntity) {
@@ -31,7 +31,7 @@ export class VirtualEntity extends WorldObject {
 	private _streamMeta: StreamMeta;
 
 	constructor(
-		position: altShared.Vector3,
+		position: Vector3,
 		dimension: number,
 		streamingGroup: StreamingGroup,
 		streamingDistance: number,
