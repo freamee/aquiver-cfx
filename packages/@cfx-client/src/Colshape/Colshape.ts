@@ -1,5 +1,5 @@
 import { WorldObject } from '../GameObject';
-import { NetEntity, NetPlayer } from '../Entity';
+import { type NetEntity, NetPlayer } from '../Entity';
 import { Vector3 } from '@aquiver-cfx/shared';
 
 export abstract class Colshape extends WorldObject {

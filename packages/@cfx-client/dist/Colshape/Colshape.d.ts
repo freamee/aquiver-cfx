@@ -1,5 +1,5 @@
 import { WorldObject } from '../GameObject';
-import { NetEntity } from '../Entity';
+import { type NetEntity } from '../Entity';
 import { Vector3 } from '@aquiver-cfx/shared';
 export declare abstract class Colshape extends WorldObject {
     protected static entities: Map<number, Colshape>;

@@ -5,6 +5,7 @@ import { Label, LabelRenderer, LabelsManager } from './Label';
 import { Marker, MarkerRenderer, MarkersManager } from './Marker';
 import { StreamingGroup } from './GameObject';
 import { meta } from './Meta/Meta';
+import { NetPlayer } from './Entity';
 
 export class MultiplayerManager {
 	public readonly markers: MarkersManager;
@@ -35,8 +36,11 @@ export class MultiplayerManager {
 
 		new Interval(
 			() => {
+				const local = NetPlayer.local;
+				const pos = local.position;
+
 				for (const group of StreamingGroup.all) {
-					group.update();
+					group.update(pos);
 				}
 			},
 			1000,

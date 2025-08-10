@@ -1,6 +1,6 @@
-import { Colshape } from './Colshape';
-import { NetEntity } from '../Entity';
 import { Vector3 } from '@aquiver-cfx/shared';
+import type { NetEntity } from '../Entity';
+import { Colshape } from './Colshape';
 export declare class AreaColshape extends Colshape {
     private _width;
     private _height;
