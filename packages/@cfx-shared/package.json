@@ -15,5 +15,6 @@
 	"main": "src/index.ts",
 	"dependencies": {
 		"three": "^0.179.1"
-	}
+	},
+	"gitHead": "6ba2fb01c83b80f62cfc4ec38fefb9fb8c499c78"
 }

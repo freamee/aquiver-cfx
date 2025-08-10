@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"type": "module",
 	"author": "freamee",
-	"license": "MIT",
+	"license": "ISC",
 	"description": "",
 	"keywords": [
 		"fivem",
@@ -22,5 +22,6 @@
 		"@aquiver-cfx/shared": "^1.0.0",
 		"@citizenfx/client": "^2.0.18214-1",
 		"three": "^0.179.1"
-	}
+	},
+	"gitHead": "6ba2fb01c83b80f62cfc4ec38fefb9fb8c499c78"
 }
