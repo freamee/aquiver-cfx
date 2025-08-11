@@ -1,18 +1,10 @@
-import { StreamingGroup } from '../StreamingGroup';
-import { WorldObject } from '@/WorldObject';
-import { NetEntity, NetPlayer } from '..';
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { StreamingGroup, WorldObject } from '../GameObject';
+import { NetEntity } from '../Entity';
+import { NetPlayer } from '../Entity/Player/NetPlayer';
 
 export abstract class Colshape extends WorldObject {
 	protected static override entities = new Map<number, Colshape>();
-
-	static override get(id: number) {
-		return this.entities.get(id);
-	}
-
-	static override get all() {
-		return Array.from(this.entities.values());
-	}
 
 	static readonly streamingGroup = new StreamingGroup(64);
 
@@ -38,30 +30,30 @@ export abstract class Colshape extends WorldObject {
 	}
 
 	isPlayerInCache(player: NetPlayer) {
-		return this.playersInCache.has(player.id);
+		return this.playersInCache.has(player.source);
 	}
 
 	onEnter(player: NetPlayer) {
-		emit('enterColshape', this, player);
+		emit('enterColshape', this.id, player.source);
 
-		this.playersInCache.add(player.id);
+		this.playersInCache.add(player.source);
 	}
 
 	onLeave(player: NetPlayer) {
 		emit('leaveColshape', this, player);
 
-		this.playersInCache.delete(player.id);
+		this.playersInCache.delete(player.source);
 	}
 
 	destroy(): void {
-		for (const id of [...this.playersInCache]) {
-			const player = NetPlayer.get(id);
-			if (player) {
-				this.onLeave(player);
-			}
-		}
+		// for (const id of [...this.playersInCache]) {
+		// 	const player = NetPlayer.get(id);
+		// 	if (player) {
+		// 		this.onLeave(player);
+		// 	}
+		// }
 
-		this.playersInCache.clear();
+		// this.playersInCache.clear();
 
 		super.destroy();
 

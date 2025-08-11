@@ -1,4 +1,4 @@
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Component } from './Component';
 
 export class MarkerComponent extends Component {

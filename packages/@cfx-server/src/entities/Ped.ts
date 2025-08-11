@@ -1,6 +1,5 @@
-import { StreamingGroup } from '@/StreamingGroup';
-import { VirtualEntity } from '@/VirtualEntity';
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { StreamingGroup, VirtualEntity } from '../GameObject';
 
 export class Ped extends VirtualEntity {
 	private static group = new StreamingGroup(64);

@@ -16,7 +16,7 @@
 		"citizenfx"
 	],
 	"main": "dist/index.js",
-	"types": "dist/types/index.d.ts",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
@@ -26,8 +26,7 @@
 	},
 	"dependencies": {
 		"@aquiver-cfx/shared": "^1.0.1-alpha.3",
-		"@citizenfx/server": "^2.0.13796-1",
-		"three": "^0.179.1"
+		"@citizenfx/server": "^2.0.13796-1"
 	},
 	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed"
 }

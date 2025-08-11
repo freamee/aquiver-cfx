@@ -1,4 +1,4 @@
-import { Quaternion, Vector3 } from 'three';
+import { Quaternion, Vector3 } from '@aquiver-cfx/shared';
 
 export abstract class NetEntity {
 	abstract get scriptID(): number;

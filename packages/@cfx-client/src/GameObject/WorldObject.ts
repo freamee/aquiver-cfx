@@ -2,28 +2,14 @@ import { Vector3 } from '@aquiver-cfx/shared';
 import { BaseObject } from './BaseObject';
 
 export abstract class WorldObject extends BaseObject {
-	protected static override entities = new Map<number, WorldObject>();
-
-	static override getByID(id: number) {
-		return this.entities.get(id);
-	}
-
-	static override get all() {
-		return Array.from(this.entities.values());
-	}
-
-	static override get count() {
-		return this.entities.size;
-	}
-
 	private _position: Vector3;
+	private _dimension: number;
 
-	constructor(position: Vector3) {
+	protected constructor(position: Vector3) {
 		super();
 
 		this._position = position;
-
-		WorldObject.entities.set(this.id, this);
+		this._dimension = 0;
 	}
 
 	distanceTo(position: Vector3): number {
@@ -38,17 +24,25 @@ export abstract class WorldObject extends BaseObject {
 		return -1;
 	}
 
+	get dimension() {
+		return this._dimension;
+	}
+
+	set dimension(value: number) {
+		const oldValue = this._dimension;
+
+		this._dimension = value;
+
+		if (oldValue !== value) {
+			emit('dimensionChange', this.id, value, oldValue);
+		}
+	}
+
 	get position() {
 		return this._position;
 	}
 
 	set position(pos: Vector3) {
 		this._position = pos;
-	}
-
-	destroy() {
-		super.destroy();
-
-		WorldObject.entities.delete(this.id);
 	}
 }

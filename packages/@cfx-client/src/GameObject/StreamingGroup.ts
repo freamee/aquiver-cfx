@@ -1,5 +1,4 @@
 import { Vector3 } from '@aquiver-cfx/shared';
-import { NetPlayer } from '../Entity';
 import { BaseObject } from './BaseObject';
 import type { WorldObject } from './WorldObject';
 
@@ -46,11 +45,14 @@ export class StreamingGroup extends BaseObject {
 		return this._maxEntitiesInStream;
 	}
 
-	update(position: Vector3) {
+	update(position: Vector3, dimension: number) {
 		const streamedSet = this._streamedEntities;
 
 		const nearbyEntities = [...this._entities.values()].filter((entity) => {
-			return entity.position.distanceTo(position) <= entity.streamingDistance;
+			return (
+				entity.position.distanceTo(position) <= entity.streamingDistance &&
+				entity.dimension === dimension
+			);
 		});
 
 		const sortedEntities = nearbyEntities.sort((a, b) => {

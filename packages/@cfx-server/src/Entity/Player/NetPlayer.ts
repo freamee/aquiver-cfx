@@ -1,4 +1,4 @@
-import { NetEntity } from './NetEntity';
+import { NetEntity } from '../NetEntity';
 
 export class NetPlayer extends NetEntity {
 	private _source: string | number;

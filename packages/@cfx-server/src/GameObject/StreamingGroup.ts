@@ -1,6 +1,6 @@
+import { NetPlayer } from '../Entity/Player/NetPlayer';
 import { BaseObject } from './BaseObject';
 import { WorldObject } from './WorldObject';
-import { NetPlayer } from './network';
 
 export class StreamingGroup extends BaseObject {
 	protected static override entities = new Map<number, StreamingGroup>();

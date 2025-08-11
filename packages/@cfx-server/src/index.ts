@@ -1,5 +1,5 @@
-export * from './network';
+export * from '@aquiver-cfx/shared';
+
+export * from './Entity';
 export * from './blip';
 export * from './colshape';
-
-export * from '@aquiver-cfx/shared';

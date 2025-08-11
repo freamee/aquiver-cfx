@@ -1,21 +1,7 @@
-import { StreamingGroup } from '../StreamingGroup';
-import { BaseObject } from '@/BaseObject';
-import { Vector3 } from 'three';
+import { Vector3 } from '@aquiver-cfx/shared';
+import { BaseObject, StreamingGroup } from '../GameObject';
 
 export abstract class Blip extends BaseObject {
-	private static GetInitialState() {
-		return {
-			color: 0,
-			isFlashing: false,
-			isShortRange: false,
-			name: 'Blip',
-			scale: 1.0,
-			sprite: 1,
-			alpha: 255,
-			display: 2
-		};
-	}
-
 	static readonly streamingGroup = new StreamingGroup(Infinity);
 
 	private _blipType: string;

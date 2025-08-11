@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { Vector3 } from 'three';
-import { NetEntity } from './NetEntity';
+import { NetEntity } from '../NetEntity';
+import { Vector3 } from '@aquiver-cfx/shared';
 
 export class NetVehicle extends NetEntity {
 	static create(

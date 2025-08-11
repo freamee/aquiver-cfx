@@ -20,11 +20,7 @@
 		"noImplicitReturns": false,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"baseUrl": ".",
 		"types": ["@types/node"],
-		"paths": {
-			"@/*": ["./src/*"]
-		},
 		"outDir": "./dist"
 	},
 	"include": ["src/**/*.ts"]

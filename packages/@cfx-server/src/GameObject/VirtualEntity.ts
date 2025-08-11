@@ -1,9 +1,8 @@
-import { Vector3 } from 'three';
-import { BaseMeta } from './Meta';
+import { Meta, Vector3 } from '@aquiver-cfx/shared';
 import { StreamingGroup } from './StreamingGroup';
 import { WorldObject } from './WorldObject';
 
-class StreamMeta extends BaseMeta {
+class StreamMeta extends Meta {
 	constructor(private entity: VirtualEntity) {
 		super();
 	}

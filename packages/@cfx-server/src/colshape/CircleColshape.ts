@@ -1,4 +1,3 @@
-import { Vector3 } from 'three';
 import { Colshape } from './Colshape';
 import { NetEntity } from '..';
 

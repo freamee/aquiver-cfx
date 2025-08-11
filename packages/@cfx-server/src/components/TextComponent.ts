@@ -1,34 +1,34 @@
-import alt from '@aquiver-alt/server';
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Component } from './Component';
 
 export class TextComponent extends Component {
 	private _text: string;
 	private _streamingDistance: number;
-	private _offset: alt.Vector3;
+	private _offset: Vector3;
 
 	constructor(text: string = '', streamingDistance: number = 16) {
 		super();
 
 		this._text = text;
 		this._streamingDistance = streamingDistance;
-		this._offset = new alt.Vector3();
+		this._offset = new Vector3();
 	}
 
 	get type(): string {
 		return 'text';
 	}
 
-	get offset(): alt.Vector3 {
+	get offset(): Vector3 {
 		return this._offset;
 	}
 
-	set offset(val: alt.Vector3) {
+	set offset(val: Vector3) {
 		this._offset = val;
 
 		this.triggerChange();
 	}
 
-	setOffset(offset: alt.Vector3) {
+	setOffset(offset: Vector3) {
 		this.offset = offset;
 
 		return this;

@@ -1,18 +1,21 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { Blip } from './Blip';
+import { RadiusBlip } from './RadiusBlip';
+import { PointBlip } from './PointBlip';
+import { AreaBlip } from './AreaBlip';
 
 export class BlipsManager {
-	// new(
-	// 	text: string,
-	// 	position: Vector3,
-	// 	color?: RGBA,
-	// 	useStreaming?: boolean,
-	// 	streamingDistance?: number
-	// ) {
-	// 	const entity = new Label(text, position, color, useStreaming, streamingDistance);
+	newPoint(...args: Parameters<(typeof PointBlip)['create']>) {
+		return PointBlip.create(...args);
+	}
 
-	// 	return entity;
-	// }
+	newArea(...args: Parameters<(typeof AreaBlip)['create']>) {
+		return AreaBlip.create(...args);
+	}
+
+	newRadius(...args: Parameters<(typeof RadiusBlip)['create']>) {
+		return RadiusBlip.create(...args);
+	}
 
 	at(id: number) {
 		return Blip.getById(id);
