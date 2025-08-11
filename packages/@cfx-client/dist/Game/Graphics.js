@@ -52,7 +52,9 @@ export class Graphics {
         // Content
         DrawRect(x, y + (height * (1 - percentage / 100)) / 2, width, (height * percentage) / 100, r, g, b, a);
     }
-    static drawTextThisFrame2D(position, text, scale = this.textSize, color = RGBA.white, center = true) {
+    static drawTextThisFrame2D(position, text, scale, color = RGBA.white, center = true) {
+        if (typeof scale !== 'number')
+            scale = this.textSize;
         const [r, g, b, a] = color.toArray();
         SetTextScale(0.0, scale);
         SetTextProportional(true);
@@ -66,7 +68,9 @@ export class Graphics {
         AddTextComponentSubstringPlayerName(text);
         EndTextCommandDisplayText(position.x, position.y);
     }
-    static drawTextThisFrame3D(position, text, scale = this.textSize, color = RGBA.white, center = true) {
+    static drawTextThisFrame3D(position, text, scale, color = RGBA.white, center = true) {
+        if (typeof scale !== 'number')
+            scale = this.textSize;
         const [r, g, b, a] = color.toArray();
         if (this.textScaleWithDistance) {
             const camPos = GameplayCamera.position;
