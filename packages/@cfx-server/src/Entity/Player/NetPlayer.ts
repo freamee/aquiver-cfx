@@ -1,4 +1,3 @@
-import { events } from '../../Events';
 import { NetEntity } from '../NetEntity';
 
 export class NetPlayer extends NetEntity {

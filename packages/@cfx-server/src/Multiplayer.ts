@@ -1,7 +1,6 @@
 import { Interval } from '@aquiver-cfx/shared';
 import { NetPlayer } from './Entity';
 import { StreamingGroup } from './GameObject';
-import { events } from './Events';
 
 export class Multiplayer {
 	private _resourceName: string = GetCurrentResourceName();
@@ -10,8 +9,6 @@ export class Multiplayer {
 		on('playerJoining', this.onPlayerJoin.bind(this));
 		on('playerDropped', this.onPlayerDrop.bind(this));
 		on('onServerResourceStart', this.onServerResourceStart.bind(this));
-
-		events.on('playerDimensionChange', this.onPlayerDimensionChange.bind(this));
 
 		new Interval(
 			() => {
@@ -25,12 +22,6 @@ export class Multiplayer {
 			true,
 			false
 		);
-	}
-
-	private onPlayerDimensionChange(player: NetPlayer, dimension: number) {
-		for (const group of StreamingGroup.all) {
-			group.update(player);
-		}
 	}
 
 	private onPlayerJoin() {
@@ -50,6 +41,8 @@ export class Multiplayer {
 		if (this._resourceName !== resourceName) return;
 
 		const players = getPlayers();
+
+		console.log('Found online players count: ' + players.length);
 
 		for (const playerSrc of players) {
 			if (NetPlayer.getBySource(playerSrc)) continue;
