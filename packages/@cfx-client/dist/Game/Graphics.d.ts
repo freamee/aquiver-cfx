@@ -2,6 +2,8 @@ import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 export declare abstract class Graphics {
     static textSize: number;
     static textScaleWithDistance: boolean;
+    static textOutline: boolean;
+    static textShadow: boolean;
     static drawRectangleBar3D(position: Vector3, percentage: number, width?: number, height?: number, border?: number, color?: RGBA, text?: string): void;
     /**
      *

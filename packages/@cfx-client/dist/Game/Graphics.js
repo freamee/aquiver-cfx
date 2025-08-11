@@ -2,8 +2,10 @@ import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
 import { GameplayCamera } from './GameplayCamera';
 export class Graphics {
-    static textSize = 0.2;
+    static textSize = 0.25;
     static textScaleWithDistance = false;
+    static textOutline = true;
+    static textShadow = true;
     static drawRectangleBar3D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = new RGBA(0, 130, 153, 155), text = '') {
         const { result, screenPosition } = this.getScreenFromWorld(position);
         if (!result)
@@ -52,12 +54,14 @@ export class Graphics {
     }
     static drawTextThisFrame2D(position, text, scale = this.textSize, color = RGBA.white, center = true) {
         const [r, g, b, a] = color.toArray();
-        SetTextScale(0.0, 1.0 * scale);
+        SetTextScale(0.0, scale);
         SetTextProportional(true);
         SetTextColour(r, g, b, a);
         SetTextCentre(center);
-        SetTextOutline();
-        SetTextDropShadow();
+        if (this.textOutline)
+            SetTextOutline();
+        if (this.textShadow)
+            SetTextDropShadow();
         BeginTextCommandDisplayText('STRING');
         AddTextComponentSubstringPlayerName(text);
         EndTextCommandDisplayText(position.x, position.y);
@@ -70,12 +74,14 @@ export class Graphics {
             scale = (scale / distance) * 5;
             scale = _.clamp(scale, 0.15, 1);
         }
-        SetTextScale(0.0, 1.0 * scale);
+        SetTextScale(0.0, scale);
         SetTextProportional(true);
         SetTextColour(r, g, b, a);
         SetTextCentre(center);
-        SetTextOutline();
-        SetTextDropShadow();
+        if (this.textOutline)
+            SetTextOutline();
+        if (this.textShadow)
+            SetTextDropShadow();
         BeginTextCommandDisplayText('STRING');
         AddTextComponentSubstringPlayerName(text);
         SetDrawOrigin(position.x, position.y, position.z, 0);

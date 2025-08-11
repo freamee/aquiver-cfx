@@ -3,8 +3,10 @@ import _ from 'lodash';
 import { GameplayCamera } from './GameplayCamera';
 
 export abstract class Graphics {
-	static textSize: number = 0.2;
+	static textSize: number = 0.25;
 	static textScaleWithDistance: boolean = false;
+	static textOutline: boolean = true;
+	static textShadow: boolean = true;
 
 	static drawRectangleBar3D(
 		position: Vector3,
@@ -122,13 +124,13 @@ export abstract class Graphics {
 	) {
 		const [r, g, b, a] = color.toArray();
 
-		SetTextScale(0.0, 1.0 * scale);
+		SetTextScale(0.0, scale);
 		SetTextProportional(true);
 		SetTextColour(r, g, b, a);
 		SetTextCentre(center);
 
-		SetTextOutline();
-		SetTextDropShadow();
+		if (this.textOutline) SetTextOutline();
+		if (this.textShadow) SetTextDropShadow();
 
 		BeginTextCommandDisplayText('STRING');
 		AddTextComponentSubstringPlayerName(text);
@@ -153,13 +155,13 @@ export abstract class Graphics {
 			scale = _.clamp(scale, 0.15, 1);
 		}
 
-		SetTextScale(0.0, 1.0 * scale);
+		SetTextScale(0.0, scale);
 		SetTextProportional(true);
 		SetTextColour(r, g, b, a);
 		SetTextCentre(center);
 
-		SetTextOutline();
-		SetTextDropShadow();
+		if (this.textOutline) SetTextOutline();
+		if (this.textShadow) SetTextDropShadow();
 
 		BeginTextCommandDisplayText('STRING');
 		AddTextComponentSubstringPlayerName(text);
