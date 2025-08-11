@@ -1,7 +1,7 @@
 import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 export declare class Label extends WorldObject {
-    private static _entities;
+    protected static _entities: Map<number, Label>;
     private static _group;
     static get all(): Label[];
     static getById(id: number): Label | undefined;

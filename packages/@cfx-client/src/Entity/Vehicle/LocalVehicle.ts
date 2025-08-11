@@ -4,7 +4,7 @@ import { Vector3 } from '@aquiver-cfx/shared';
 
 /** Vehicle model needs to be loaded before creating the entity. */
 export class LocalVehicle extends NetVehicle {
-	private static _entities = new Map<number, LocalVehicle>();
+	protected static _entities = new Map<number, LocalVehicle>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {

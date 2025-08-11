@@ -3,14 +3,14 @@ import { type NetEntity, NetPlayer } from '../Entity';
 import { Vector3 } from '@aquiver-cfx/shared';
 
 export abstract class Colshape extends WorldObject {
-	protected static override entities = new Map<number, Colshape>();
+	protected static override _entities = new Map<number, Colshape>();
 
 	static override get all() {
-		return [...this.entities.values()];
+		return [...this._entities.values()];
 	}
 
 	static getById(id: number) {
-		return this.entities.get(id);
+		return this._entities.get(id);
 	}
 
 	abstract isPointIn(position: Vector3): boolean;
@@ -20,7 +20,7 @@ export abstract class Colshape extends WorldObject {
 	protected constructor(position: Vector3) {
 		super(position);
 
-		Colshape.entities.set(this.id, this);
+		Colshape._entities.set(this.id, this);
 	}
 
 	onEnter() {
@@ -40,7 +40,7 @@ export abstract class Colshape extends WorldObject {
 
 		super.destroy();
 
-		Colshape.entities.delete(this.id);
+		Colshape._entities.delete(this.id);
 	}
 }
 
@@ -64,6 +64,7 @@ setInterval(() => {
 
 		if (!isInside && lastColshapes.has(entity.id)) {
 			lastColshapes.delete(entity.id);
+
 			entity.onLeave();
 		}
 	}

@@ -3,10 +3,10 @@ import { BaseObject } from './BaseObject';
 import type { WorldObject } from './WorldObject';
 
 export class StreamingGroup extends BaseObject {
-	protected static override entities = new Map<number, StreamingGroup>();
+	protected static override _entities = new Map<number, StreamingGroup>();
 
 	static override get all() {
-		return [...this.entities.values()];
+		return [...this._entities.values()];
 	}
 
 	private _maxEntitiesInStream: number;
@@ -20,7 +20,7 @@ export class StreamingGroup extends BaseObject {
 
 		this._maxEntitiesInStream = maxEntitiesInStream;
 
-		StreamingGroup.entities.set(this.id, this);
+		StreamingGroup._entities.set(this.id, this);
 	}
 
 	addPool(worldObject: WorldObject) {
@@ -79,7 +79,7 @@ export class StreamingGroup extends BaseObject {
 	destroy(): void {
 		super.destroy();
 
-		StreamingGroup.entities.delete(this.id);
+		StreamingGroup._entities.delete(this.id);
 
 		this._streamedEntities.clear();
 	}

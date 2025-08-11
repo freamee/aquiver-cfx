@@ -4,7 +4,7 @@ import { Vector3 } from '@aquiver-cfx/shared';
 
 /** Model needs to be loaded before creating the entity. */
 export class LocalProp extends NetProp {
-	private static _entities = new Map<number, LocalProp>();
+	protected static _entities = new Map<number, LocalProp>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {

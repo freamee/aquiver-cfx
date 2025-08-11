@@ -1,18 +1,24 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 export class Blip extends WorldObject {
-    _scriptID;
-    static entities = new Map();
+    static _entities = new Map();
+    static _remote = new Map();
     static get all() {
-        return [...this.entities.values()];
+        return [...this._entities.values()];
+    }
+    static getByRemoteId(id) {
+        return this._remote.get(id);
     }
     static getById(id) {
-        return this.entities.get(id);
+        return this._entities.get(id);
     }
-    constructor(_scriptID) {
-        super(new Vector3());
-        this._scriptID = _scriptID;
-        Blip.entities.set(this.id, this);
+    _scriptID = -1;
+    constructor(position, remoteId = -1) {
+        super(position, remoteId);
+        Blip._entities.set(this.id, this);
+        if (this.isRemote) {
+            Blip._remote.set(this.remoteId, this);
+        }
     }
     get isValid() {
         return !!DoesBlipExist(this._scriptID);
@@ -89,6 +95,9 @@ export class Blip extends WorldObject {
         if (this.isValid) {
             RemoveBlip(this._scriptID);
         }
-        Blip.entities.delete(this.id);
+        Blip._entities.delete(this.id);
+        if (this.isRemote) {
+            Blip._remote.delete(this.remoteId);
+        }
     }
 }

@@ -1,11 +1,10 @@
 import { Blip } from './Blip';
 export class RadiusBlip extends Blip {
-    static create(position, radius) {
-        const id = AddBlipForRadius(position.x, position.y, position.z, radius);
-        const entity = new RadiusBlip(id);
-        return entity;
+    constructor(position, radius, remoteId = -1) {
+        super(position, remoteId);
+        super.scale = radius;
     }
-    constructor(id) {
-        super(id);
+    createBlip() {
+        return AddBlipForRadius(this.position.x, this.position.y, this.position.z, this.scale);
     }
 }

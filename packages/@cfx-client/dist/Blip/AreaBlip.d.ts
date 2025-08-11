@@ -1,10 +1,10 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { Blip } from './Blip';
 export declare class AreaBlip extends Blip {
-    static create(position: Vector3, width: number, height: number): AreaBlip;
     private _width;
     private _height;
-    constructor(id: number);
+    constructor(position: Vector3, width: number, height: number, remoteId?: number);
+    protected createBlip(): number;
     setAreaSize(width: number, height: number): void;
     get width(): number;
     set width(width: number);

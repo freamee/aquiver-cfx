@@ -2,14 +2,8 @@ import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { Label } from './Label';
 
 export class LabelsManager {
-	new(
-		text: string,
-		position: Vector3,
-		color?: RGBA,
-		useStreaming?: boolean,
-		streamingDistance?: number
-	) {
-		const entity = new Label(text, position, color, useStreaming, streamingDistance);
+	new(...args: ConstructorParameters<typeof Label>) {
+		const entity = new Label(...args);
 
 		return entity;
 	}

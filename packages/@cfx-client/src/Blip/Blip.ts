@@ -2,20 +2,33 @@ import { Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 
 export abstract class Blip extends WorldObject {
-	protected static override entities = new Map<number, Blip>();
+	protected static override _entities = new Map<number, Blip>();
+	protected static override _remote = new Map<number, Blip>();
 
 	static override get all() {
-		return [...this.entities.values()];
+		return [...this._entities.values()];
 	}
 
-	static getById(id: number) {
-		return this.entities.get(id);
+	static override getByRemoteId(id: number) {
+		return this._remote.get(id);
 	}
 
-	protected constructor(private _scriptID: number) {
-		super(new Vector3());
+	static override getById(id: number) {
+		return this._entities.get(id);
+	}
 
-		Blip.entities.set(this.id, this);
+	protected abstract createBlip(): number;
+
+	private _scriptID: number = -1;
+
+	protected constructor(position: Vector3, remoteId: number = -1) {
+		super(position, remoteId);
+
+		Blip._entities.set(this.id, this);
+
+		if (this.isRemote) {
+			Blip._remote.set(this.remoteId, this);
+		}
 	}
 
 	get isValid() {
@@ -119,6 +132,10 @@ export abstract class Blip extends WorldObject {
 			RemoveBlip(this._scriptID);
 		}
 
-		Blip.entities.delete(this.id);
+		Blip._entities.delete(this.id);
+
+		if (this.isRemote) {
+			Blip._remote.delete(this.remoteId);
+		}
 	}
 }

@@ -3,12 +3,13 @@ import { AreaBlip, Blip, PointBlip, RadiusBlip } from './Blip';
 import { BlipsManager } from './Blip/BlipsManager';
 import { Label, LabelRenderer, LabelsManager } from './Label';
 import { Marker, MarkerRenderer, MarkersManager } from './Marker';
-import { StreamingGroup } from './GameObject';
+import { BaseObject, StreamingGroup } from './GameObject';
 import { meta } from './Meta/Meta';
-import { NetPlayer } from './Entity';
+import { LocalPed, LocalProp, LocalVehicle, NetPlayer } from './Entity';
 import { CheckpointsManager } from './Checkpoint/CheckpointsManager';
 import { Checkpoint } from './Checkpoint/Checkpoint';
 import { Sprite, SpriteRenderer, SpritesManager } from './Sprite';
+import { syncedMeta } from './Meta/SyncedMeta';
 export class MultiplayerManager {
     markers;
     Marker = Marker;
@@ -28,6 +29,11 @@ export class MultiplayerManager {
     setMeta = meta.set.bind(meta);
     deleteMeta = meta.delete.bind(meta);
     hasMeta = meta.has.bind(meta);
+    getSyncedMetaEntries = syncedMeta.fromEntries.bind(syncedMeta);
+    getSyncedMeta = syncedMeta.get.bind(syncedMeta);
+    setSyncedMeta = syncedMeta.set.bind(syncedMeta);
+    deleteSyncedMeta = syncedMeta.delete.bind(syncedMeta);
+    hasSyncedMeta = syncedMeta.has.bind(syncedMeta);
     constructor() {
         this.markers = new MarkersManager();
         this.labels = new LabelsManager();
@@ -37,6 +43,8 @@ export class MultiplayerManager {
         new MarkerRenderer();
         new LabelRenderer();
         new SpriteRenderer();
+        on('onResourceStop', this.onResourceStop.bind(this));
+        on('onResourceStart', this.onResourceStart.bind(this));
         new Interval(() => {
             const local = NetPlayer.local;
             const pos = local.position;
@@ -52,5 +60,39 @@ export class MultiplayerManager {
                 group.update(pos, value);
             }
         });
+        onNet('object:create', (data) => {
+            console.log(data);
+        });
+        onNet('object:destroy', (id) => {
+            const baseObject = BaseObject.getByRemoteId(id);
+            if (baseObject) {
+                baseObject.destroy();
+            }
+        });
+        onNet('baseObject:setSyncedMeta', (id, key, value) => {
+            const baseObject = BaseObject.getByRemoteId(id);
+            if (baseObject) {
+                baseObject.syncedMeta.set(key, value);
+            }
+        });
+        onNet('baseObject:deleteSyncedMeta', (id, key) => {
+            const baseObject = BaseObject.getByRemoteId(id);
+            if (baseObject) {
+                baseObject.syncedMeta.delete(key);
+            }
+        });
+    }
+    onResourceStart(resourceName) {
+        if (GetCurrentResourceName() !== resourceName)
+            return;
+    }
+    onResourceStop(resourceName) {
+        if (GetCurrentResourceName() !== resourceName)
+            return;
+        const entities = [...LocalProp.all, ...LocalPed.all, ...LocalVehicle.all];
+        for (const entity of entities) {
+            entity.destroy();
+        }
+        console.log(`Destroyed ${entities.length} entity.`);
     }
 }

@@ -3,14 +3,14 @@ import { RadiusBlip } from './RadiusBlip';
 import { PointBlip } from './PointBlip';
 import { AreaBlip } from './AreaBlip';
 export class BlipsManager {
-    newPoint(...args) {
-        return PointBlip.create(...args);
+    newPoint(position) {
+        return new PointBlip(position);
     }
-    newArea(...args) {
-        return AreaBlip.create(...args);
+    newArea(position, width, height) {
+        return new AreaBlip(position, width, height);
     }
-    newRadius(...args) {
-        return RadiusBlip.create(...args);
+    newRadius(position, radius) {
+        return new RadiusBlip(position, radius);
     }
     at(id) {
         return Blip.getById(id);

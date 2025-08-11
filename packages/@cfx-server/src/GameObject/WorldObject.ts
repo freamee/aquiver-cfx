@@ -52,19 +52,21 @@ export abstract class WorldObject extends BaseObject {
 		return this._streamingGroup;
 	}
 
-	get position() {
-		return new Vector3();
-	}
-
 	get dimension() {
-		return 0;
+		return this._dimension;
 	}
 
 	set dimension(dimension: number) {
+		this._dimension = dimension;
 		// this.emitToTargets('WorldObject:SetDimension', this.id, dimension);
 	}
 
+	get position() {
+		return this._position;
+	}
+
 	set position(pos: Vector3) {
+		this._position = pos;
 		// this.emitToTargets('WorldObject:SetPosition', this.id, pos);
 	}
 

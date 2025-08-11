@@ -1,8 +1,8 @@
-import { RGBA, Vector3 } from '@aquiver-cfx/shared';
+import { Vector3 } from '@aquiver-cfx/shared';
 import { StreamingGroup, WorldObject } from '../GameObject';
 
 export class Sprite extends WorldObject {
-	private static _entities = new Map<number, Sprite>();
+	protected static _entities = new Map<number, Sprite>();
 	private static _group = new StreamingGroup(32);
 
 	static get all() {

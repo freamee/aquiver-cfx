@@ -4,7 +4,7 @@ import { Vector3 } from '@aquiver-cfx/shared';
 
 /** Model needs to be loaded before creating the entity. */
 export class LocalPed extends NetPed {
-	private static _entities = new Map<number, LocalPed>();
+	protected static override _entities = new Map<number, LocalPed>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {

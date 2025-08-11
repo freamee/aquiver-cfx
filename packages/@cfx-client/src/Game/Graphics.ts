@@ -14,7 +14,7 @@ export abstract class Graphics {
 		width: number = 0.03,
 		height: number = 0.0065,
 		border: number = 0.001,
-		color: RGBA = new RGBA(0, 130, 153, 155),
+		color: RGBA = RGBA.white,
 		text: string = ''
 	) {
 		const { result, screenPosition } = this.getScreenFromWorld(position);
@@ -38,7 +38,7 @@ export abstract class Graphics {
 		width: number = 0.03,
 		height: number = 0.0065,
 		border: number = 0.001,
-		color: RGBA = new RGBA(0, 130, 153, 155),
+		color: RGBA = RGBA.white,
 		text: string = ''
 	) {
 		const aspectRatio = GetScreenAspectRatio(false);
@@ -77,7 +77,7 @@ export abstract class Graphics {
 		width: number = 0.05,
 		height: number = 0.0045,
 		border: number = 0.001,
-		color: RGBA = new RGBA(0, 130, 153, 155)
+		color: RGBA = RGBA.white
 	) {
 		const { result, screenPosition } = this.getScreenFromWorld(position);
 		if (!result) return;
@@ -91,7 +91,7 @@ export abstract class Graphics {
 		width: number = 0.0045,
 		height: number = 0.05,
 		border: number = 0.001,
-		color: RGBA = new RGBA(0, 130, 153, 155)
+		color: RGBA = RGBA.white
 	) {
 		const { x, y } = position;
 		const [r, g, b, a] = color.toArray();
@@ -215,7 +215,7 @@ export abstract class Graphics {
 		type: number,
 		position: Vector3,
 		scale: number | Vector3 = 0.25,
-		color: RGBA = new RGBA(0, 130, 153, 155),
+		color: RGBA = RGBA.white,
 		rotation: Vector3 = new Vector3(),
 		direction: Vector3 = new Vector3(),
 		bobUpAndDown: boolean = false,

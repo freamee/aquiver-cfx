@@ -1,15 +1,9 @@
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Marker } from './Marker';
-import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 
 export class MarkersManager {
-	new(
-		type: number,
-		position: Vector3,
-		color?: RGBA,
-		useStreaming?: boolean,
-		streamingDistance?: number
-	) {
-		const marker = new Marker(type, position, color, useStreaming, streamingDistance);
+	new(...args: ConstructorParameters<typeof Marker>) {
+		const marker = new Marker(...args);
 
 		return marker;
 	}

@@ -1,11 +1,14 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 export declare abstract class Blip extends WorldObject {
-    private _scriptID;
-    protected static entities: Map<number, Blip>;
+    protected static _entities: Map<number, Blip>;
+    protected static _remote: Map<number, Blip>;
     static get all(): Blip[];
+    static getByRemoteId(id: number): Blip | undefined;
     static getById(id: number): Blip | undefined;
-    protected constructor(_scriptID: number);
+    protected abstract createBlip(): number;
+    private _scriptID;
+    protected constructor(position: Vector3, remoteId?: number);
     get isValid(): boolean;
     get scriptID(): number;
     set name(name: string);

@@ -1,6 +1,35 @@
+import { events } from '../../Events';
 import { NetEntity } from '../NetEntity';
 
 export class NetPlayer extends NetEntity {
+	private static _entities = new Map<number, NetPlayer>();
+
+	static getBySource(source: string | number) {
+		return this.all.find((i) => i.source === source);
+	}
+
+	static getByScriptId(id: number) {
+		return this.all.find((i) => i.scriptID === id);
+	}
+
+	static getByNetId(id: number) {
+		return this.all.find((i) => i.networkID === id);
+	}
+
+	static getById(id: number) {
+		return this._entities.get(id);
+	}
+
+	static getByBagname(bagName: string) {
+		const id = GetPlayerFromStateBagName(bagName);
+
+		return this.getByScriptId(id);
+	}
+
+	static get all() {
+		return [...this._entities.values()];
+	}
+
 	private _source: string | number;
 
 	protected _stateBag: StateBagInterface;
@@ -32,5 +61,7 @@ export class NetPlayer extends NetEntity {
 		SetPlayerRoutingBucket(this.playerSrc, dimension);
 
 		this.setStateBag('PLAYER_DIMENSION', dimension, true);
+
+		events.emit('playerDimensionChange', this, dimension);
 	}
 }

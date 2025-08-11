@@ -1,7 +1,7 @@
 import { Marker } from './Marker';
 export class MarkersManager {
-    new(type, position, color, useStreaming, streamingDistance) {
-        const marker = new Marker(type, position, color, useStreaming, streamingDistance);
+    new(...args) {
+        const marker = new Marker(...args);
         return marker;
     }
     at(id) {

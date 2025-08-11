@@ -1,7 +1,7 @@
 import { Label } from './Label';
 export class LabelsManager {
-    new(text, position, color, useStreaming, streamingDistance) {
-        const entity = new Label(text, position, color, useStreaming, streamingDistance);
+    new(...args) {
+        const entity = new Label(...args);
         return entity;
     }
     at(id) {

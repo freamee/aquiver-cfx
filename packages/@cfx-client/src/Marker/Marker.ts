@@ -2,7 +2,7 @@ import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { StreamingGroup, WorldObject } from '../GameObject';
 
 export class Marker extends WorldObject {
-	private static _entities = new Map<number, Marker>();
+	protected static _entities = new Map<number, Marker>();
 	private static _group = new StreamingGroup(64);
 
 	static get all() {

@@ -1,15 +1,11 @@
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
 import { CircleColshape } from '../Colshape/CircleColshape';
-import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 export class Checkpoint extends CircleColshape {
-    static entities = new Map();
-    static getByID(id) {
-        return this.entities.get(id);
-    }
     static getInitialOptions() {
         return {
             destination: new Vector3(),
-            color: new RGBA(0, 130, 153, 125)
+            color: RGBA.white
         };
     }
     _checkpointType;

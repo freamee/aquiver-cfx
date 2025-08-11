@@ -1,16 +1,16 @@
 import { WorldObject } from '../GameObject';
 import { NetPlayer } from '../Entity';
 export class Colshape extends WorldObject {
-    static entities = new Map();
+    static _entities = new Map();
     static get all() {
-        return [...this.entities.values()];
+        return [...this._entities.values()];
     }
     static getById(id) {
-        return this.entities.get(id);
+        return this._entities.get(id);
     }
     constructor(position) {
         super(position);
-        Colshape.entities.set(this.id, this);
+        Colshape._entities.set(this.id, this);
     }
     onEnter() {
         emit('enterColshape', this.id);
@@ -24,7 +24,7 @@ export class Colshape extends WorldObject {
             this.onLeave();
         }
         super.destroy();
-        Colshape.entities.delete(this.id);
+        Colshape._entities.delete(this.id);
     }
 }
 const lastColshapes = new Set();

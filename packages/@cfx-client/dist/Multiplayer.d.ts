@@ -26,5 +26,14 @@ export declare class MultiplayerManager {
     setMeta: <T = unknown>(key: string, value: T) => void;
     deleteMeta: (key: string) => boolean;
     hasMeta: (key: string) => boolean;
+    getSyncedMetaEntries: () => {
+        [k: string]: any;
+    };
+    getSyncedMeta: <T = unknown>(key: string) => T;
+    setSyncedMeta: <T = unknown>(key: string, value: T) => void;
+    deleteSyncedMeta: (key: string) => boolean;
+    hasSyncedMeta: (key: string) => boolean;
     constructor();
+    private onResourceStart;
+    private onResourceStop;
 }

@@ -37,18 +37,23 @@ class _SyncedMeta extends Meta {
 }
 
 export abstract class BaseObject {
-	protected static entities = new Map<number, BaseObject>();
+	protected static _entities = new Map<number, BaseObject>();
+	protected static _remote = new Map<number, BaseObject>();
 
-	static getByID(id: number) {
-		return this.entities.get(id);
+	static getById(id: number) {
+		return this._entities.get(id);
+	}
+
+	static getByRemoteId(id: number) {
+		return this._remote.get(id);
 	}
 
 	static get all() {
-		return Array.from(this.entities.values());
+		return [...this._entities.values()];
 	}
 
 	static get count() {
-		return this.entities.size;
+		return this._entities.size + this._remote.size;
 	}
 
 	private static idCounter = 0;
@@ -56,18 +61,32 @@ export abstract class BaseObject {
 	private _id: number;
 	private _meta: _Meta;
 	private _syncedMeta: _SyncedMeta;
+	private _remoteId: number = -1;
 
-	protected constructor() {
+	protected constructor(remoteId: number = -1) {
 		this._id = BaseObject.idCounter++;
+		this._remoteId = remoteId;
 		this._meta = new _Meta(this);
 		this._syncedMeta = new _SyncedMeta(this);
 
-		BaseObject.entities.set(this.id, this);
+		BaseObject._entities.set(this._id, this);
+
+		if (this.isRemote) {
+			BaseObject._remote.set(this._remoteId, this);
+		}
 	}
 
 	/** Client Id */
 	get id() {
 		return this._id;
+	}
+
+	get isRemote() {
+		return this._remoteId !== -1;
+	}
+
+	get remoteId() {
+		return this._remoteId;
 	}
 
 	/** Client side meta (does not affected by server set meta.) */
@@ -85,6 +104,10 @@ export abstract class BaseObject {
 	}
 
 	destroy() {
-		BaseObject.entities.delete(this.id);
+		BaseObject._entities.delete(this.id);
+
+		if (this.isRemote) {
+			BaseObject._remote.delete(this._remoteId);
+		}
 	}
 }

@@ -1,7 +1,7 @@
+import { Vector3 } from '@aquiver-cfx/shared';
 import { Marker } from './Marker';
-import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 export declare class MarkersManager {
-    new(type: number, position: Vector3, color?: RGBA, useStreaming?: boolean, streamingDistance?: number): Marker;
+    new(...args: ConstructorParameters<typeof Marker>): Marker;
     at(id: number): Marker | undefined;
     get all(): Marker[];
     get streamed(): Marker[];

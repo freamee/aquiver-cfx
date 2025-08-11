@@ -1,6 +1,6 @@
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
 import { CircleColshape } from '../Colshape/CircleColshape';
-import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 
 interface iOptions {
 	destination: Vector3;
@@ -8,16 +8,10 @@ interface iOptions {
 }
 
 export class Checkpoint extends CircleColshape {
-	protected static override entities = new Map<number, Checkpoint>();
-
-	static override getByID(id: number) {
-		return this.entities.get(id);
-	}
-
 	private static getInitialOptions(): Required<iOptions> {
 		return {
 			destination: new Vector3(),
-			color: new RGBA(0, 130, 153, 125)
+			color: RGBA.white
 		};
 	}
 

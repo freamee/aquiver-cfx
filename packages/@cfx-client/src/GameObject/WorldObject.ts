@@ -5,8 +5,8 @@ export abstract class WorldObject extends BaseObject {
 	private _position: Vector3;
 	private _dimension: number;
 
-	protected constructor(position: Vector3) {
-		super();
+	protected constructor(position: Vector3, remoteId: number = -1) {
+		super(remoteId);
 
 		this._position = position;
 		this._dimension = 0;

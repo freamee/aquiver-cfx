@@ -6,7 +6,7 @@ export class Graphics {
     static textScaleWithDistance = false;
     static textOutline = true;
     static textShadow = true;
-    static drawRectangleBar3D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = new RGBA(0, 130, 153, 155), text = '') {
+    static drawRectangleBar3D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = RGBA.white, text = '') {
         const { result, screenPosition } = this.getScreenFromWorld(position);
         if (!result)
             return;
@@ -21,7 +21,7 @@ export class Graphics {
      * @param border default: 0.001
      * @param color
      */
-    static drawRectangleBar2D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = new RGBA(0, 130, 153, 155), text = '') {
+    static drawRectangleBar2D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = RGBA.white, text = '') {
         const aspectRatio = GetScreenAspectRatio(false);
         const { x, y } = position;
         const [r, g, b, a] = color.toArray();
@@ -36,13 +36,13 @@ export class Graphics {
             this.drawTextThisFrame2D(new Vector2(x, y - height + (border * 2) / 2), text, 0.2);
         }
     }
-    static drawRectangleBar3DVertical(position, percentage, width = 0.05, height = 0.0045, border = 0.001, color = new RGBA(0, 130, 153, 155)) {
+    static drawRectangleBar3DVertical(position, percentage, width = 0.05, height = 0.0045, border = 0.001, color = RGBA.white) {
         const { result, screenPosition } = this.getScreenFromWorld(position);
         if (!result)
             return;
         this.drawRectangleBar2DVertical(screenPosition, percentage, width, height, border, color);
     }
-    static drawRectangleBar2DVertical(position, percentage, width = 0.0045, height = 0.05, border = 0.001, color = new RGBA(0, 130, 153, 155)) {
+    static drawRectangleBar2DVertical(position, percentage, width = 0.0045, height = 0.05, border = 0.001, color = RGBA.white) {
         const { x, y } = position;
         const [r, g, b, a] = color.toArray();
         // Border
@@ -121,7 +121,7 @@ export class Graphics {
         this.drawTextThisFrame2D(position, text);
         DrawRect(position.x, position.y + height, width, heightFactor, 0, 0, 0, 155);
     }
-    static drawMarker(type, position, scale = 0.25, color = new RGBA(0, 130, 153, 155), rotation = new Vector3(), direction = new Vector3(), bobUpAndDown = false, faceCamera = false, rotate = true) {
+    static drawMarker(type, position, scale = 0.25, color = RGBA.white, rotation = new Vector3(), direction = new Vector3(), bobUpAndDown = false, faceCamera = false, rotate = true) {
         const scaleX = typeof scale === 'number' ? scale : scale.x;
         const scaleY = typeof scale === 'number' ? scale : scale.y;
         const scaleZ = typeof scale === 'number' ? scale : scale.z;

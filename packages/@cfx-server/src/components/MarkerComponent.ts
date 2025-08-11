@@ -1,4 +1,4 @@
-import { Vector3 } from '@aquiver-cfx/shared';
+import { RGBA, Vector3 } from '@aquiver-cfx/shared';
 import { Component } from './Component';
 
 export class MarkerComponent extends Component {
@@ -22,7 +22,7 @@ export class MarkerComponent extends Component {
 		this._direction = new Vector3();
 		this._rotation = new Vector3();
 		this._scale = 1.0;
-		this._color = [0, 130, 153, 125];
+		this._color = RGBA.white.toArray();
 		this._streamingDistance = streamingDistance;
 	}
 

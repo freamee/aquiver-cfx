@@ -1,125 +1,105 @@
 import { Vector3 } from '@aquiver-cfx/shared';
-import { BaseObject, StreamingGroup } from '../GameObject';
+import { StreamingGroup, WorldObject } from '../GameObject';
 
-export abstract class Blip extends BaseObject {
-	static readonly streamingGroup = new StreamingGroup(Infinity);
+export abstract class Blip extends WorldObject {
+	protected static override entities = new Map<number, Blip>();
+
+	private static readonly streamingGroup = new StreamingGroup(Infinity);
 
 	private _blipType: string;
 
+	private _sprite: number = 0;
+	private _scale: number = 1.0;
+	private _alpha: number = 255;
+	private _rotation: number = 0;
+	private _name: string = '';
+	private _isShortRange: boolean = false;
+	private _color: number = -1;
+
 	constructor(type: string, position: Vector3, dimension: number = 0, global: boolean = true) {
-		super(true);
+		super(position, dimension, Blip.streamingGroup, Infinity, global);
 
 		this._blipType = type;
+
+		Blip.entities.set(this.id, this);
 	}
 
 	get blipType() {
 		return this._blipType;
 	}
 
-	// get alpha() {
-	// 	return this._state.alpha;
-	// }
+	get name() {
+		return this._name;
+	}
 
-	// set alpha(alpha: number) {
-	// 	this._state.alpha = alpha;
+	set name(name: string) {
+		this._name = name;
+	}
 
-	// 	this.sync();
-	// }
+	get isShortRange() {
+		return this._isShortRange;
+	}
 
-	// get rotation() {
-	// 	return this._state.rotation;
-	// }
+	set isShortRange(value: boolean) {
+		this._isShortRange = value;
+	}
 
-	// set rotation(rot: number) {
-	// 	this._state.rotation = rot;
+	get sprite() {
+		return this._sprite;
+	}
 
-	// 	this.sync();
-	// }
+	set sprite(sprite: number) {
+		this._sprite = sprite;
+	}
 
-	// get scale() {
-	// 	return this._state.scale;
-	// }
+	get scale() {
+		return this._scale;
+	}
 
-	// set scale(scale: number) {
-	// 	this._state.scale = scale;
+	set scale(scale: number) {
+		this._scale = scale;
+	}
 
-	// 	this.sync();
-	// }
+	get alpha() {
+		return this._alpha;
+	}
 
-	// get color(): altShared.BlipColor {
-	// 	return this._state.color;
-	// }
+	set alpha(alpha: number) {
+		this._alpha = alpha;
+	}
 
-	// set color(color: altShared.BlipColor) {
-	// 	this._state.color = color;
+	get rotation() {
+		return this._rotation;
+	}
 
-	// 	this.sync();
-	// }
+	set rotation(value: number) {
+		this._rotation = value;
+	}
 
-	// get sprite(): altShared.BlipSprite {
-	// 	return this._state.sprite;
-	// }
+	get color() {
+		return this._color;
+	}
 
-	// set sprite(sprite: altShared.BlipSprite) {
-	// 	this._state.sprite = sprite;
+	set color(color: number) {
+		this._color = color;
+	}
 
-	// 	this.sync();
-	// }
+	toJSON() {
+		return {
+			...super.toJSON(),
+			sprite: this._sprite,
+			scale: this._scale,
+			alpha: this._alpha,
+			rotation: this._rotation,
+			name: this._name,
+			isShortRange: this._isShortRange,
+			color: this._color
+		};
+	}
 
-	// get name() {
-	// 	return this._state.name;
-	// }
+	destroy(): void {
+		super.destroy();
 
-	// set name(name: string) {
-	// 	this._state.name = name;
-
-	// 	this.sync();
-	// }
-
-	// get isShortRange() {
-	// 	return this._state.isShortRange;
-	// }
-
-	// set isShortRange(state: boolean) {
-	// 	this._state.isShortRange = state;
-
-	// 	this.sync();
-	// }
-
-	// get isFlashing() {
-	// 	return this._state.isFlashing;
-	// }
-
-	// set isFlashing(state: boolean) {
-	// 	this._state.isFlashing = state;
-
-	// 	this.sync();
-	// }
-
-	// get isRoute() {
-	// 	return this._state.isRoute;
-	// }
-
-	// set isRoute(state: boolean) {
-	// 	this._state.isRoute = state;
-
-	// 	this.sync();
-	// }
-
-	// get routeColor() {
-	// 	return this._state.routeColor;
-	// }
-
-	// set routeColor(color: number) {
-	// 	this._state.routeColor = color;
-
-	// 	this.sync();
-	// }
-
-	// @Debounce(50)
-	// protected sync() {
-	// 	this.cbStreamedEntities((targetSource) => {
-	// 		emitNet('blip:sync', targetSource, this.id, this._state);
-	// 	});
-	// }
+		Blip.entities.delete(this.id);
+	}
 }

@@ -1,12 +1,10 @@
-import { CircleColshape } from '../Colshape/CircleColshape';
 import { RGBA, Vector3 } from '@aquiver-cfx/shared';
+import { CircleColshape } from '../Colshape/CircleColshape';
 interface iOptions {
     destination: Vector3;
     color: RGBA;
 }
 export declare class Checkpoint extends CircleColshape {
-    protected static entities: Map<number, Checkpoint>;
-    static getByID(id: number): Checkpoint | undefined;
     private static getInitialOptions;
     private _checkpointType;
     private _destination;

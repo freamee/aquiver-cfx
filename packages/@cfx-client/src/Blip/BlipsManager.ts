@@ -5,16 +5,16 @@ import { PointBlip } from './PointBlip';
 import { AreaBlip } from './AreaBlip';
 
 export class BlipsManager {
-	newPoint(...args: Parameters<(typeof PointBlip)['create']>) {
-		return PointBlip.create(...args);
+	newPoint(position: Vector3) {
+		return new PointBlip(position);
 	}
 
-	newArea(...args: Parameters<(typeof AreaBlip)['create']>) {
-		return AreaBlip.create(...args);
+	newArea(position: Vector3, width: number, height: number) {
+		return new AreaBlip(position, width, height);
 	}
 
-	newRadius(...args: Parameters<(typeof RadiusBlip)['create']>) {
-		return RadiusBlip.create(...args);
+	newRadius(position: Vector3, radius: number) {
+		return new RadiusBlip(position, radius);
 	}
 
 	at(id: number) {
