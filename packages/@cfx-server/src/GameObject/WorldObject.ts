@@ -1,6 +1,6 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { BaseObject } from './BaseObject';
-import { StreamingGroup } from './StreamingGroup';
+import type { StreamingGroup } from './StreamingGroup';
 
 export abstract class WorldObject extends BaseObject {
 	protected static override entities = new Map<number, WorldObject>();
