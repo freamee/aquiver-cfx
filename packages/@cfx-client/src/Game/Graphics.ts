@@ -118,10 +118,12 @@ export abstract class Graphics {
 	static drawTextThisFrame2D(
 		position: Vector2,
 		text: string,
-		scale: number = this.textSize,
+		scale?: number,
 		color: RGBA = RGBA.white,
 		center: boolean = true
 	) {
+		if (typeof scale !== 'number') scale = this.textSize;
+
 		const [r, g, b, a] = color.toArray();
 
 		SetTextScale(0.0, scale);
@@ -140,10 +142,12 @@ export abstract class Graphics {
 	static drawTextThisFrame3D(
 		position: Vector3,
 		text: string,
-		scale: number = this.textSize,
+		scale?: number,
 		color: RGBA = RGBA.white,
 		center: boolean = true
 	) {
+		if (typeof scale !== 'number') scale = this.textSize;
+
 		const [r, g, b, a] = color.toArray();
 
 		if (this.textScaleWithDistance) {
