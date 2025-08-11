@@ -39,6 +39,8 @@ export class NetPlayer extends NetEntity {
 
 		this._source = source;
 		this._stateBag = Player(source).state;
+
+		NetPlayer._entities.set(this.source, this);
 	}
 
 	get source() {
@@ -61,7 +63,11 @@ export class NetPlayer extends NetEntity {
 		SetPlayerRoutingBucket(this.playerSrc, dimension);
 
 		this.setStateBag('PLAYER_DIMENSION', dimension, true);
+	}
 
-		events.emit('playerDimensionChange', this, dimension);
+	destroy(): void {
+		super.destroy();
+
+		NetPlayer._entities.delete(this.source);
 	}
 }

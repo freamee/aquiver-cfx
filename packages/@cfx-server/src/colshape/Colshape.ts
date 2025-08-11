@@ -40,7 +40,7 @@ export abstract class Colshape extends WorldObject {
 	}
 
 	onLeave(player: NetPlayer) {
-		emit('leaveColshape', this, player);
+		emit('leaveColshape', this.id, player.source);
 
 		this.playersInCache.delete(player.source);
 	}

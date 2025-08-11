@@ -4,11 +4,9 @@ import { StreamingGroup } from './GameObject';
 import { events } from './Events';
 
 export class Multiplayer {
-	private _resourceName: string;
+	private _resourceName: string = GetCurrentResourceName();
 
 	constructor() {
-		this._resourceName = GetCurrentResourceName();
-
 		on('playerJoining', this.onPlayerJoin.bind(this));
 		on('playerDropped', this.onPlayerDrop.bind(this));
 		on('onServerResourceStart', this.onServerResourceStart.bind(this));
