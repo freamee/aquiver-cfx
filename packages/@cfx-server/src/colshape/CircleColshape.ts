@@ -1,12 +1,8 @@
 import { Colshape } from './Colshape';
-import { NetEntity } from '..';
+import { NetEntity, Vector3 } from '..';
 
 export class CircleColshape extends Colshape {
 	protected static override entities = new Map<number, CircleColshape>();
-
-	static override get(id: number) {
-		return this.entities.get(id);
-	}
 
 	static override get all() {
 		return Array.from(this.entities.values());

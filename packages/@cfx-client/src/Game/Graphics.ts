@@ -1,7 +1,11 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
+import { GameplayCamera } from './GameplayCamera';
 
 export abstract class Graphics {
+	static textSize: number = 0.2;
+	static textScaleWithDistance: boolean = false;
+
 	static drawRectangleBar3D(
 		position: Vector3,
 		percentage: number,
@@ -112,7 +116,7 @@ export abstract class Graphics {
 	static drawTextThisFrame2D(
 		position: Vector2,
 		text: string,
-		scale: number = 0.25,
+		scale: number = this.textSize,
 		color: RGBA = RGBA.white,
 		center: boolean = true
 	) {
@@ -127,28 +131,27 @@ export abstract class Graphics {
 		SetTextDropShadow();
 
 		BeginTextCommandDisplayText('STRING');
-		AddTextComponentSubstringPlayerName(`<font face='Fire Sans'>${text}</font>`);
+		AddTextComponentSubstringPlayerName(text);
 		EndTextCommandDisplayText(position.x, position.y);
 	}
 
 	static drawTextThisFrame3D(
 		position: Vector3,
 		text: string,
-		scale: number = 0.25,
+		scale: number = this.textSize,
 		color: RGBA = RGBA.white,
 		center: boolean = true
 	) {
 		const [r, g, b, a] = color.toArray();
 
-		// if (this.options.textSize) {
-		// 	const [x, y, z] = GetFinalRenderedCamCoord();
-		// 	const camPos = new altShared.Vector3(x, y, z);
+		if (this.textScaleWithDistance) {
+			const camPos = GameplayCamera.position;
 
-		// 	const distance = camPos.distanceTo(position);
+			const distance = camPos.distanceTo(position);
 
-		// 	scale = (scale / distance) * 5;
-		// 	scale = _.clamp(scale, 0.15, 1);
-		// }
+			scale = (scale / distance) * 5;
+			scale = _.clamp(scale, 0.15, 1);
+		}
 
 		SetTextScale(0.0, 1.0 * scale);
 		SetTextProportional(true);
@@ -159,7 +162,7 @@ export abstract class Graphics {
 		SetTextDropShadow();
 
 		BeginTextCommandDisplayText('STRING');
-		AddTextComponentSubstringPlayerName(`<font face='Fire Sans'>${text}</font>`);
+		AddTextComponentSubstringPlayerName(text);
 		SetDrawOrigin(position.x, position.y, position.z, 0);
 		EndTextCommandDisplayText(0.0, 0.0);
 		ClearDrawOrigin();

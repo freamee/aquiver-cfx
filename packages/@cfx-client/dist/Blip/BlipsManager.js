@@ -1,15 +1,17 @@
 import { Blip } from './Blip';
+import { RadiusBlip } from './RadiusBlip';
+import { PointBlip } from './PointBlip';
+import { AreaBlip } from './AreaBlip';
 export class BlipsManager {
-    // new(
-    // 	text: string,
-    // 	position: Vector3,
-    // 	color?: RGBA,
-    // 	useStreaming?: boolean,
-    // 	streamingDistance?: number
-    // ) {
-    // 	const entity = new Label(text, position, color, useStreaming, streamingDistance);
-    // 	return entity;
-    // }
+    newPoint(...args) {
+        return PointBlip.create(...args);
+    }
+    newArea(...args) {
+        return AreaBlip.create(...args);
+    }
+    newRadius(...args) {
+        return RadiusBlip.create(...args);
+    }
     at(id) {
         return Blip.getById(id);
     }

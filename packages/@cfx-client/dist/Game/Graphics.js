@@ -1,6 +1,9 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import _ from 'lodash';
+import { GameplayCamera } from './GameplayCamera';
 export class Graphics {
+    static textSize = 0.2;
+    static textScaleWithDistance = false;
     static drawRectangleBar3D(position, percentage, width = 0.03, height = 0.0065, border = 0.001, color = new RGBA(0, 130, 153, 155), text = '') {
         const { result, screenPosition } = this.getScreenFromWorld(position);
         if (!result)
@@ -47,7 +50,7 @@ export class Graphics {
         // Content
         DrawRect(x, y + (height * (1 - percentage / 100)) / 2, width, (height * percentage) / 100, r, g, b, a);
     }
-    static drawTextThisFrame2D(position, text, scale = 0.25, color = RGBA.white, center = true) {
+    static drawTextThisFrame2D(position, text, scale = this.textSize, color = RGBA.white, center = true) {
         const [r, g, b, a] = color.toArray();
         SetTextScale(0.0, 1.0 * scale);
         SetTextProportional(true);
@@ -56,18 +59,17 @@ export class Graphics {
         SetTextOutline();
         SetTextDropShadow();
         BeginTextCommandDisplayText('STRING');
-        AddTextComponentSubstringPlayerName(`<font face='Fire Sans'>${text}</font>`);
+        AddTextComponentSubstringPlayerName(text);
         EndTextCommandDisplayText(position.x, position.y);
     }
-    static drawTextThisFrame3D(position, text, scale = 0.25, color = RGBA.white, center = true) {
+    static drawTextThisFrame3D(position, text, scale = this.textSize, color = RGBA.white, center = true) {
         const [r, g, b, a] = color.toArray();
-        // if (this.options.textSize) {
-        // 	const [x, y, z] = GetFinalRenderedCamCoord();
-        // 	const camPos = new altShared.Vector3(x, y, z);
-        // 	const distance = camPos.distanceTo(position);
-        // 	scale = (scale / distance) * 5;
-        // 	scale = _.clamp(scale, 0.15, 1);
-        // }
+        if (this.textScaleWithDistance) {
+            const camPos = GameplayCamera.position;
+            const distance = camPos.distanceTo(position);
+            scale = (scale / distance) * 5;
+            scale = _.clamp(scale, 0.15, 1);
+        }
         SetTextScale(0.0, 1.0 * scale);
         SetTextProportional(true);
         SetTextColour(r, g, b, a);
@@ -75,7 +77,7 @@ export class Graphics {
         SetTextOutline();
         SetTextDropShadow();
         BeginTextCommandDisplayText('STRING');
-        AddTextComponentSubstringPlayerName(`<font face='Fire Sans'>${text}</font>`);
+        AddTextComponentSubstringPlayerName(text);
         SetDrawOrigin(position.x, position.y, position.z, 0);
         EndTextCommandDisplayText(0.0, 0.0);
         ClearDrawOrigin();

@@ -9,6 +9,9 @@ export abstract class WorldObject extends BaseObject {
 
 	private readonly _streamingDistance: number;
 
+	private _position: Vector3;
+	private _dimension: number;
+
 	constructor(
 		position: Vector3,
 		dimension: number,
@@ -17,6 +20,9 @@ export abstract class WorldObject extends BaseObject {
 		replicated: boolean = false
 	) {
 		super(replicated);
+
+		this._position = position;
+		this._dimension = dimension;
 
 		this._streamingGroup = streamingGroup;
 		this._streamingDistance = streamingDistance;

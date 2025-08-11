@@ -2,6 +2,9 @@ import { AreaBlip, Blip, PointBlip, RadiusBlip } from './Blip';
 import { BlipsManager } from './Blip/BlipsManager';
 import { Label, LabelsManager } from './Label';
 import { Marker, MarkersManager } from './Marker';
+import { CheckpointsManager } from './Checkpoint/CheckpointsManager';
+import { Checkpoint } from './Checkpoint/Checkpoint';
+import { Sprite, SpritesManager } from './Sprite';
 export declare class MultiplayerManager {
     readonly markers: MarkersManager;
     readonly Marker: typeof Marker;
@@ -12,6 +15,10 @@ export declare class MultiplayerManager {
     readonly PointBlip: typeof PointBlip;
     readonly AreaBlip: typeof AreaBlip;
     readonly RadiusBlip: typeof RadiusBlip;
+    readonly checkpoints: CheckpointsManager;
+    readonly Checkpoint: typeof Checkpoint;
+    readonly sprites: SpritesManager;
+    readonly Sprite: typeof Sprite;
     getMetaEntries: () => {
         [k: string]: any;
     };

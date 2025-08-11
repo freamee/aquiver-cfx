@@ -22,7 +22,7 @@ export abstract class Colshape extends WorldObject {
 		dimension: number = 0,
 		global: boolean = true
 	) {
-		super(global);
+		super(position, dimension, Colshape.streamingGroup, 256, global);
 
 		this._colshapeType = colshapeType;
 
