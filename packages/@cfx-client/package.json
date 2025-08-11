@@ -21,6 +21,8 @@
 		"dist"
 	],
 	"scripts": {
+		"clean": "rimraf dist",
+		"build": "npm run clean && npm run tsc",
 		"tsc": "tsc",
 		"watch": "tsc --watch"
 	},
