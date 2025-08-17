@@ -1,5 +1,4 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
-import _ from 'lodash';
 import { GameplayCamera } from './GameplayCamera';
 export class Graphics {
     static textSize = 0.25;
@@ -76,7 +75,7 @@ export class Graphics {
             const camPos = GameplayCamera.position;
             const distance = camPos.distanceTo(position);
             scale = (scale / distance) * 5;
-            scale = _.clamp(scale, 0.15, 1);
+            scale = Math.min(Math.max(scale, 0.15), 1);
         }
         SetTextScale(0.0, scale);
         SetTextProportional(true);
@@ -142,7 +141,7 @@ export class Graphics {
         const camPos = new Vector3(cX, cY, cZ);
         const distance = camPos.distanceTo(position);
         scale = (scale / distance) * 5;
-        scale = _.clamp(scale, 0.15, 3.5);
+        scale = Math.min(Math.max(scale, 0.15), 3.5);
         this.drawSprite(textureDict, textureName, new Vector2(x, y), scale, color);
     }
     static drawSprite(textureDict, textureName, position, scale = 1.0, color = RGBA.white) {
@@ -158,6 +157,31 @@ export class Graphics {
         }
         else {
             RequestStreamedTextureDict(textureDict, true);
+        }
+    }
+    static drawClickPoint3D(position, scale = 0.02, color = RGBA.white, onClick) {
+        const { result, screenPosition } = this.getScreenFromWorld(position);
+        if (!result)
+            return;
+        this.drawClickPoint2D(screenPosition, scale, color, onClick);
+    }
+    static drawClickPoint2D(position, scale = 0.02, color = RGBA.white, onClick) {
+        const aspectRatio = GetScreenAspectRatio(false);
+        const width = scale / aspectRatio;
+        const height = scale;
+        const [cursorXpx, cursorYpx] = GetNuiCursorPosition();
+        const [resX, resY] = GetActiveScreenResolution();
+        // Pixel → normalizált 0.0–1.0
+        const cursorX = cursorXpx / resX;
+        const cursorY = cursorYpx / resY;
+        const isHover = cursorX >= position.x - width / 2 &&
+            cursorX <= position.x + width / 2 &&
+            cursorY >= position.y - height / 2 &&
+            cursorY <= position.y + height / 2;
+        const drawColor = isHover ? new RGBA(255, 255, 0, color.a) : color;
+        DrawRect(position.x, position.y, width, height, drawColor.r, drawColor.g, drawColor.b, drawColor.a);
+        if (isHover && IsDisabledControlJustPressed(0, 24)) {
+            onClick();
         }
     }
     /** Returns the screen coords. (0.0 <-> 1.0) */

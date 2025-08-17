@@ -1,5 +1,4 @@
 import { RGBA, Vector3 } from '@aquiver-cfx/shared';
-import _ from 'lodash';
 import { CircleColshape } from '../Colshape/CircleColshape';
 export class Checkpoint extends CircleColshape {
     static getInitialOptions() {
@@ -14,7 +13,7 @@ export class Checkpoint extends CircleColshape {
     _scriptID;
     constructor(type, position, radius, options = {}) {
         super(position, radius);
-        const { destination, color } = _.merge(Checkpoint.getInitialOptions(), options);
+        const { destination, color } = { ...Checkpoint.getInitialOptions(), ...options };
         this._checkpointType = type;
         this._destination = destination;
         this._color = color;

@@ -1,5 +1,4 @@
 import { Meta } from '@aquiver-cfx/shared';
-import _ from 'lodash';
 
 class LocalMeta extends Meta {
 	constructor() {

@@ -1,5 +1,4 @@
 import { Meta } from '@aquiver-cfx/shared';
-import _ from 'lodash';
 
 class _Meta extends Meta {
 	constructor(private baseObject: BaseObject) {
@@ -52,6 +51,8 @@ export abstract class BaseObject {
 		return this.entities.size;
 	}
 
+	abstract get type(): string;
+
 	private static idCounter = 0;
 
 	private _id: number;
@@ -64,8 +65,6 @@ export abstract class BaseObject {
 		this._replicated = replicated;
 		this._meta = new _Meta(this);
 		this._syncedMeta = new _SyncedMeta(this);
-
-		emitNet('object:create', -1, this.toJSON());
 
 		BaseObject.entities.set(this.id, this);
 	}
@@ -90,16 +89,7 @@ export abstract class BaseObject {
 		return this instanceof type;
 	}
 
-	toJSON(): Record<string, any> {
-		return {
-			id: this._id,
-			syncedMeta: this._syncedMeta
-		};
-	}
-
 	destroy() {
-		emitNet('object:destroy', -1, this.id);
-
 		BaseObject.entities.delete(this.id);
 	}
 }

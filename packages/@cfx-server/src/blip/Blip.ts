@@ -84,19 +84,6 @@ export abstract class Blip extends WorldObject {
 		this._color = color;
 	}
 
-	toJSON() {
-		return {
-			...super.toJSON(),
-			sprite: this._sprite,
-			scale: this._scale,
-			alpha: this._alpha,
-			rotation: this._rotation,
-			name: this._name,
-			isShortRange: this._isShortRange,
-			color: this._color
-		};
-	}
-
 	destroy(): void {
 		super.destroy();
 

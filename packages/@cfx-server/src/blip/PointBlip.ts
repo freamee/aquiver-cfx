@@ -10,6 +10,10 @@ export class PointBlip extends Blip {
 		PointBlip.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'PointBlip';
+	}
+
 	destroy(): void {
 		super.destroy();
 

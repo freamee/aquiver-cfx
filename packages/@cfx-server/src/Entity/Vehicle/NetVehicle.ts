@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { NetEntity } from '../NetEntity';
 import { Vector3 } from '@aquiver-cfx/shared';
 
@@ -93,8 +92,6 @@ export class NetVehicle extends NetEntity {
 	}
 
 	set dirtLevel(level: number) {
-		level = _.clamp(level, 0.0, 15.0);
-
 		SetVehicleDirtLevel(this._scriptID, level);
 	}
 

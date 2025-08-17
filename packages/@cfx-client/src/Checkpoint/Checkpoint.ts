@@ -1,5 +1,4 @@
 import { RGBA, Vector3 } from '@aquiver-cfx/shared';
-import _ from 'lodash';
 import { CircleColshape } from '../Colshape/CircleColshape';
 
 interface iOptions {
@@ -24,7 +23,7 @@ export class Checkpoint extends CircleColshape {
 	constructor(type: number, position: Vector3, radius: number, options: Partial<iOptions> = {}) {
 		super(position, radius);
 
-		const { destination, color } = _.merge(Checkpoint.getInitialOptions(), options);
+		const { destination, color } = { ...Checkpoint.getInitialOptions(), ...options };
 
 		this._checkpointType = type;
 		this._destination = destination;

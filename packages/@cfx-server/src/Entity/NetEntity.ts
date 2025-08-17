@@ -1,9 +1,14 @@
 import { Quaternion, Vector3 } from '@aquiver-cfx/shared';
+import { BaseObject } from '../GameObject';
 
-export abstract class NetEntity {
+export abstract class NetEntity extends BaseObject {
 	abstract get scriptID(): number;
 
 	protected abstract _stateBag: StateBagInterface;
+
+	get type(): string {
+		return 'Entity';
+	}
 
 	setStateBag<T = unknown>(key: string, value: T, replicated: boolean) {
 		this._stateBag.set(key, value, replicated);

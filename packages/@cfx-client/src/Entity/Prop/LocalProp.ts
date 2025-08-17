@@ -45,6 +45,22 @@ export class LocalProp extends NetProp {
 		return true;
 	}
 
+	get model(): number {
+		return super.model;
+	}
+
+	set model(modelHash: number | string) {
+		CreateModelSwap(
+			this.position.x,
+			this.position.y,
+			this.position.z,
+			0.5,
+			this.model,
+			modelHash,
+			true
+		);
+	}
+
 	get useStreaming() {
 		return this._useStreaming;
 	}

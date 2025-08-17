@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export class RGBA {
 	static readonly red: RGBA = new RGBA(255, 0, 0);
 	static readonly green: RGBA = new RGBA(0, 255, 0);
@@ -8,17 +6,7 @@ export class RGBA {
 	static readonly white: RGBA = new RGBA(255, 255, 255);
 	static readonly clear: RGBA = new RGBA(0, 0, 0, 0);
 
-	public r: number;
-	public g: number;
-	public b: number;
-	public a: number;
-
-	constructor(r: number, g: number, b: number, a: number = 255) {
-		this.r = _.clamp(r, 0, 255);
-		this.g = _.clamp(g, 0, 255);
-		this.b = _.clamp(b, 0, 255);
-		this.a = _.clamp(a, 0, 255);
-	}
+	constructor(public r: number, public g: number, public b: number, public a: number = 255) {}
 
 	toArray(): [number, number, number, number] {
 		return [this.r, this.g, this.b, this.a];

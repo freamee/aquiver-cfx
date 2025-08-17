@@ -22,6 +22,10 @@ export class AreaBlip extends Blip {
 		AreaBlip.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'AreaBlip';
+	}
+
 	get height() {
 		return this._height;
 	}
@@ -36,14 +40,6 @@ export class AreaBlip extends Blip {
 
 	set width(width: number) {
 		this._width = width;
-	}
-
-	toJSON() {
-		return {
-			...super.toJSON(),
-			height: this._height,
-			width: this._width
-		};
 	}
 
 	destroy(): void {

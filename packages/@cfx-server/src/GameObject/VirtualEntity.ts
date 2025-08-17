@@ -43,6 +43,10 @@ export class VirtualEntity extends WorldObject {
 		VirtualEntity.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'VirtualEntity';
+	}
+
 	get streamMeta() {
 		return this._streamMeta;
 	}

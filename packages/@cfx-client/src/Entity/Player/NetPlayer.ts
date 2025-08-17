@@ -1,4 +1,5 @@
 import { NetEntity } from '../NetEntity';
+import { NetPed } from '../Ped';
 
 export class NetPlayer extends NetEntity {
 	private static localPlayer: NetPlayer;
@@ -51,6 +52,10 @@ export class NetPlayer extends NetEntity {
 
 	get scriptID(): number {
 		return GetPlayerPed(this.playerIndex);
+	}
+
+	get ped() {
+		return NetPed.getByScriptId(this.scriptID);
 	}
 
 	get dimension() {

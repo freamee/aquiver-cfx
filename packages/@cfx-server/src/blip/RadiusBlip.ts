@@ -12,6 +12,10 @@ export class RadiusBlip extends Blip {
 		RadiusBlip.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'RadiusBlip';
+	}
+
 	get radius() {
 		return super.scale;
 	}

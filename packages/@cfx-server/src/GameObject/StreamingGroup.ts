@@ -23,6 +23,10 @@ export class StreamingGroup extends BaseObject {
 		StreamingGroup.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'StreamingGroup';
+	}
+
 	addPool(worldObject: WorldObject) {
 		this._entities.set(worldObject.id, worldObject);
 	}

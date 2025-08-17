@@ -18,6 +18,10 @@ export class CircleColshape extends Colshape {
 		CircleColshape.entities.set(this.id, this);
 	}
 
+	get type(): string {
+		return 'CircleColshape';
+	}
+
 	get radius() {
 		return this._radius;
 	}

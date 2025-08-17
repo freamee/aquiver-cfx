@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export abstract class Meta {
 	private _metaMap = new Map<string, any>();
 
@@ -14,9 +12,9 @@ export abstract class Meta {
 
 		this.onSet(key, value, oldValue);
 
-		if (!_.isEqual(value, oldValue)) {
-			this.onChange(key, value, oldValue);
-		}
+		// if (!_.isEqual(value, oldValue)) {
+		// 	this.onChange(key, value, oldValue);
+		// }
 	}
 
 	get<T = unknown>(key: string): T {

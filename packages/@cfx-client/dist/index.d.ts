@@ -8,5 +8,6 @@ export * from './utils';
 export * from './Game';
 export * from './Entity';
 export * from './GameObject';
+export * from './Input';
 declare const mp: MultiplayerManager;
 export default mp;
