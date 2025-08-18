@@ -1,6 +1,11 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import { GameplayCamera } from './GameplayCamera';
 
+type ClickpointOptions = {
+	sprite: [string, string];
+	text: string;
+};
+
 export abstract class Graphics {
 	static textSize: number = 0.25;
 	static textScaleWithDistance: boolean = false;
@@ -323,20 +328,20 @@ export abstract class Graphics {
 	static drawClickPoint3D(
 		position: Vector3,
 		scale: number = 0.02,
-		color: RGBA = RGBA.white,
-		onClick: () => void
+		onClick: () => void,
+		options: Partial<ClickpointOptions> = {}
 	) {
 		const { result, screenPosition } = this.getScreenFromWorld(position);
 		if (!result) return;
 
-		this.drawClickPoint2D(screenPosition, scale, color, onClick);
+		this.drawClickPoint2D(screenPosition, scale, onClick, options);
 	}
 
 	static drawClickPoint2D(
 		position: Vector2,
 		scale: number = 0.02,
-		color: RGBA = RGBA.white,
-		onClick: () => void
+		onClick: () => void,
+		options: Partial<ClickpointOptions> = {}
 	) {
 		const aspectRatio = GetScreenAspectRatio(false);
 		const width = scale / aspectRatio;
@@ -355,7 +360,7 @@ export abstract class Graphics {
 			cursorY >= position.y - height / 2 &&
 			cursorY <= position.y + height / 2;
 
-		const drawColor = isHover ? new RGBA(255, 255, 0, color.a) : color;
+		const drawColor = isHover ? new RGBA(35, 35, 35, 225) : new RGBA(25, 25, 25, 225);
 
 		DrawRect(
 			position.x,
@@ -368,8 +373,20 @@ export abstract class Graphics {
 			drawColor.a
 		);
 
-		if (isHover && IsDisabledControlJustPressed(0, 24)) {
-			onClick();
+		if (options.sprite) {
+			const [dictionary, name] = options.sprite;
+
+			this.drawSprite(dictionary, name, new Vector2(screenX, screenY), 0.55);
+		}
+
+		if (isHover) {
+			if (options.text) {
+				this.drawTextThisFrame2D(new Vector2(cursorX, cursorY), options.text);
+			}
+
+			if (IsDisabledControlJustPressed(0, 24)) {
+				onClick();
+			}
 		}
 	}
 
