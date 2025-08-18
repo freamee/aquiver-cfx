@@ -182,11 +182,11 @@ export class Graphics {
         DrawRect(position.x, position.y, width, height, drawColor.r, drawColor.g, drawColor.b, drawColor.a);
         if (options.sprite) {
             const [dictionary, name] = options.sprite;
-            this.drawSprite(dictionary, name, new Vector2(screenX, screenY), 0.55);
+            this.drawSprite(dictionary, name, position, 0.55);
         }
         if (isHover) {
             if (options.text) {
-                this.drawTextThisFrame2D(new Vector2(cursorX, cursorY), options.text);
+                this.drawTextThisFrame2D(position.clone().add(new Vector2(0, 0.02)), options.text);
             }
             if (IsDisabledControlJustPressed(0, 24)) {
                 onClick();
