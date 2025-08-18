@@ -1,4 +1,8 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
+type ClickpointOptions = {
+    sprite: [string, string];
+    text: string;
+};
 export declare abstract class Graphics {
     static textSize: number;
     static textScaleWithDistance: boolean;
@@ -26,8 +30,8 @@ export declare abstract class Graphics {
     static drawRect(position: Vector2, width: number, height: number, color?: RGBA): void;
     static drawSprite3D(textureDict: string, textureName: string, position: Vector3, scale?: number, color?: RGBA): void;
     static drawSprite(textureDict: string, textureName: string, position: Vector2, scale?: number, color?: RGBA): void;
-    static drawClickPoint3D(position: Vector3, scale: number | undefined, color: RGBA | undefined, onClick: () => void): void;
-    static drawClickPoint2D(position: Vector2, scale: number | undefined, color: RGBA | undefined, onClick: () => void): void;
+    static drawClickPoint3D(position: Vector3, scale: number | undefined, onClick: () => void, options?: Partial<ClickpointOptions>): void;
+    static drawClickPoint2D(position: Vector2, scale: number | undefined, onClick: () => void, options?: Partial<ClickpointOptions>): void;
     /** Returns the screen coords. (0.0 <-> 1.0) */
     static getScreenFromWorld(position: Vector3): {
         result: boolean;
@@ -36,3 +40,4 @@ export declare abstract class Graphics {
         screenPosition: Vector2;
     };
 }
+export {};

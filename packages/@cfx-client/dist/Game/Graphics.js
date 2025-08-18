@@ -159,13 +159,13 @@ export class Graphics {
             RequestStreamedTextureDict(textureDict, true);
         }
     }
-    static drawClickPoint3D(position, scale = 0.02, color = RGBA.white, onClick) {
+    static drawClickPoint3D(position, scale = 0.02, onClick, options = {}) {
         const { result, screenPosition } = this.getScreenFromWorld(position);
         if (!result)
             return;
-        this.drawClickPoint2D(screenPosition, scale, color, onClick);
+        this.drawClickPoint2D(screenPosition, scale, onClick, options);
     }
-    static drawClickPoint2D(position, scale = 0.02, color = RGBA.white, onClick) {
+    static drawClickPoint2D(position, scale = 0.02, onClick, options = {}) {
         const aspectRatio = GetScreenAspectRatio(false);
         const width = scale / aspectRatio;
         const height = scale;
@@ -178,10 +178,19 @@ export class Graphics {
             cursorX <= position.x + width / 2 &&
             cursorY >= position.y - height / 2 &&
             cursorY <= position.y + height / 2;
-        const drawColor = isHover ? new RGBA(255, 255, 0, color.a) : color;
+        const drawColor = isHover ? new RGBA(35, 35, 35, 225) : new RGBA(25, 25, 25, 225);
         DrawRect(position.x, position.y, width, height, drawColor.r, drawColor.g, drawColor.b, drawColor.a);
-        if (isHover && IsDisabledControlJustPressed(0, 24)) {
-            onClick();
+        if (options.sprite) {
+            const [dictionary, name] = options.sprite;
+            this.drawSprite(dictionary, name, new Vector2(screenX, screenY), 0.55);
+        }
+        if (isHover) {
+            if (options.text) {
+                this.drawTextThisFrame2D(new Vector2(cursorX, cursorY), options.text);
+            }
+            if (IsDisabledControlJustPressed(0, 24)) {
+                onClick();
+            }
         }
     }
     /** Returns the screen coords. (0.0 <-> 1.0) */
