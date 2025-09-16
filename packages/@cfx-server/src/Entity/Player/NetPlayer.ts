@@ -2,32 +2,25 @@ import { NetEntity } from '../NetEntity';
 import { NetVehicle } from '../Vehicle';
 
 export class NetPlayer extends NetEntity {
-	private static _entities = new Map<number, NetPlayer>();
-
 	static getBySource(source: string | number) {
-		return this.all.find((i) => i.source === source);
+		return new NetPlayer(source);
 	}
 
 	static getByScriptId(id: number) {
-		return this.all.find((i) => i.scriptID === id);
+		const entity = NetworkGetEntityFromNetworkId(id);
+
+		return new NetPlayer(entity);
 	}
 
 	static getByNetId(id: number) {
-		return this.all.find((i) => i.networkID === id);
-	}
-
-	static getById(id: number) {
-		return this._entities.get(id);
+		// const entity = NetworkGetEntityFromNetworkId(id)
+		// return this.all.find((i) => i.networkID === id);
 	}
 
 	static getByBagname(bagName: string) {
 		const id = GetPlayerFromStateBagName(bagName);
 
 		return this.getByScriptId(id);
-	}
-
-	static get all() {
-		return [...this._entities.values()];
 	}
 
 	private _source: string | number;
@@ -39,8 +32,6 @@ export class NetPlayer extends NetEntity {
 
 		this._source = source;
 		this._stateBag = Player(source).state;
-
-		NetPlayer._entities.set(this.source, this);
 	}
 
 	get source() {
@@ -73,8 +64,6 @@ export class NetPlayer extends NetEntity {
 
 	set dimension(dimension: number) {
 		SetPlayerRoutingBucket(this.playerSrc, dimension);
-
-		this.setStateBag('PLAYER_DIMENSION', dimension, true);
 	}
 
 	set controlsEnabled(state: boolean) {
@@ -94,22 +83,18 @@ export class NetPlayer extends NetEntity {
 	}
 
 	beginAction(): boolean {
-		if (this.meta.has('actionState')) {
+		if (this.getStateBag<boolean>('actionState')) {
 			return false;
 		}
 
-		this.meta.set('actionState', true);
+		this.setStateBag('actionState', true, false);
 
 		return true;
 	}
 
 	endAction(): void {
-		this.meta.delete('actionState');
+		return this.setStateBag('actionState', false, false);
 	}
 
-	destroy(): void {
-		super.destroy();
-
-		NetPlayer._entities.delete(this.source);
-	}
+	destroy(): void {}
 }

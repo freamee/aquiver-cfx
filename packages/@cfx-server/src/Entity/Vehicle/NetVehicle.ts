@@ -37,10 +37,14 @@ export class NetVehicle extends NetEntity {
 
 	protected _stateBag: StateBagInterface;
 
-	constructor(private _scriptID: number) {
+	private readonly _scriptID: number;
+
+	constructor(scriptID: number) {
 		super();
 
-		this._stateBag = Entity(this._scriptID).state;
+		this._scriptID = scriptID;
+
+		this._stateBag = Entity(scriptID).state;
 	}
 
 	get scriptID(): number {
@@ -48,11 +52,11 @@ export class NetVehicle extends NetEntity {
 	}
 
 	get modelHash() {
-		return GetEntityModel(this._scriptID);
+		return GetEntityModel(this.scriptID);
 	}
 
 	get numberPlate() {
-		return GetVehicleNumberPlateText(this._scriptID);
+		return GetVehicleNumberPlateText(this.scriptID);
 	}
 
 	get bodyHealth() {
@@ -60,7 +64,7 @@ export class NetVehicle extends NetEntity {
 	}
 
 	set bodyHealth(health: number) {
-		SetVehicleBodyHealth(this._scriptID, health);
+		SetVehicleBodyHealth(this.scriptID, health);
 	}
 
 	get engineHealth() {
@@ -80,7 +84,7 @@ export class NetVehicle extends NetEntity {
 	}
 
 	get handbrakeOn() {
-		return GetVehicleHandbrake(this._scriptID);
+		return GetVehicleHandbrake(this.scriptID);
 	}
 
 	get engineOn() {
@@ -88,11 +92,11 @@ export class NetVehicle extends NetEntity {
 	}
 
 	get dirtLevel() {
-		return GetVehicleDirtLevel(this._scriptID);
+		return GetVehicleDirtLevel(this.scriptID);
 	}
 
 	set dirtLevel(level: number) {
-		SetVehicleDirtLevel(this._scriptID, level);
+		SetVehicleDirtLevel(this.scriptID, level);
 	}
 
 	get speed() {
@@ -108,12 +112,12 @@ export class NetVehicle extends NetEntity {
 	}
 
 	get dimension(): number {
-		return GetEntityRoutingBucket(this._scriptID);
+		return GetEntityRoutingBucket(this.scriptID);
 	}
 
 	set dimension(dimension: number) {
 		super.dimension = dimension;
 
-		SetEntityRoutingBucket(this._scriptID, dimension);
+		SetEntityRoutingBucket(this.scriptID, dimension);
 	}
 }

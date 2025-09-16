@@ -5,21 +5,11 @@ export class AreaBlip extends Blip {
 	private _width: number = 0;
 	private _height: number = 0;
 
-	constructor(position: Vector3, width: number, height: number, remoteId: number = -1) {
-		super(position, remoteId);
+	constructor(position: Vector3, width: number, height: number) {
+		super(AddBlipForArea(position.x, position.y, position.z, width, height));
 
 		this._width = width;
 		this._height = height;
-	}
-
-	protected createBlip(): number {
-		return AddBlipForArea(
-			this.position.x,
-			this.position.y,
-			this.position.z,
-			this._width,
-			this._height
-		);
 	}
 
 	setAreaSize(width: number, height: number) {

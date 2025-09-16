@@ -3,8 +3,7 @@ import { Blip } from './Blip';
 export declare class AreaBlip extends Blip {
     private _width;
     private _height;
-    constructor(position: Vector3, width: number, height: number, remoteId?: number);
-    protected createBlip(): number;
+    constructor(position: Vector3, width: number, height: number);
     setAreaSize(width: number, height: number): void;
     get width(): number;
     set width(width: number);

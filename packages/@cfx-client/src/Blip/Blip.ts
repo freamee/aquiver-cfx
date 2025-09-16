@@ -2,41 +2,20 @@ import { Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 
 export abstract class Blip extends WorldObject {
-	protected static override _entities = new Map<number, Blip>();
-	protected static override _remote = new Map<number, Blip>();
-
-	static override get all() {
-		return [...this._entities.values()];
-	}
-
-	static override getByRemoteId(id: number) {
-		return this._remote.get(id);
-	}
-
-	static override getById(id: number) {
-		return this._entities.get(id);
-	}
-
-	protected abstract createBlip(): number;
-
 	private _scriptID: number = -1;
 
-	protected constructor(position: Vector3, remoteId: number = -1) {
-		super(position, remoteId);
+	protected constructor(id: number) {
+		super();
 
-		Blip._entities.set(this.id, this);
-
-		if (this.isRemote) {
-			Blip._remote.set(this.remoteId, this);
-		}
-	}
-
-	get isValid() {
-		return !!DoesBlipExist(this._scriptID);
+		this._scriptID = id;
 	}
 
 	get scriptID() {
 		return this._scriptID;
+	}
+
+	get isValid() {
+		return !!DoesBlipExist(this._scriptID);
 	}
 
 	set name(name: string) {
@@ -52,8 +31,6 @@ export abstract class Blip extends WorldObject {
 	}
 
 	set position(pos: Vector3) {
-		super.position = pos;
-
 		SetBlipCoords(this._scriptID, pos.x, pos.y, pos.z);
 	}
 
@@ -126,16 +103,6 @@ export abstract class Blip extends WorldObject {
 	}
 
 	destroy(): void {
-		super.destroy();
-
-		if (this.isValid) {
-			RemoveBlip(this._scriptID);
-		}
-
-		Blip._entities.delete(this.id);
-
-		if (this.isRemote) {
-			Blip._remote.delete(this.remoteId);
-		}
+		RemoveBlip(this._scriptID);
 	}
 }

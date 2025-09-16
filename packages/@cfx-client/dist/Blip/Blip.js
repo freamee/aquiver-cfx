@@ -1,30 +1,16 @@
 import { Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 export class Blip extends WorldObject {
-    static _entities = new Map();
-    static _remote = new Map();
-    static get all() {
-        return [...this._entities.values()];
-    }
-    static getByRemoteId(id) {
-        return this._remote.get(id);
-    }
-    static getById(id) {
-        return this._entities.get(id);
-    }
     _scriptID = -1;
-    constructor(position, remoteId = -1) {
-        super(position, remoteId);
-        Blip._entities.set(this.id, this);
-        if (this.isRemote) {
-            Blip._remote.set(this.remoteId, this);
-        }
-    }
-    get isValid() {
-        return !!DoesBlipExist(this._scriptID);
+    constructor(id) {
+        super();
+        this._scriptID = id;
     }
     get scriptID() {
         return this._scriptID;
+    }
+    get isValid() {
+        return !!DoesBlipExist(this._scriptID);
     }
     set name(name) {
         AddTextEntry('MYBLIP', name);
@@ -36,7 +22,6 @@ export class Blip extends WorldObject {
         return new Vector3(x, y, z);
     }
     set position(pos) {
-        super.position = pos;
         SetBlipCoords(this._scriptID, pos.x, pos.y, pos.z);
     }
     set rotation(rot) {
@@ -91,13 +76,6 @@ export class Blip extends WorldObject {
         SetBlipRouteColour(this._scriptID, color);
     }
     destroy() {
-        super.destroy();
-        if (this.isValid) {
-            RemoveBlip(this._scriptID);
-        }
-        Blip._entities.delete(this.id);
-        if (this.isRemote) {
-            Blip._remote.delete(this.remoteId);
-        }
+        RemoveBlip(this._scriptID);
     }
 }

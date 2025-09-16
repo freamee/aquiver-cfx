@@ -8,18 +8,22 @@ export class NetVehicle extends NetEntity {
 	static getByNetId(id: number) {
 		const entity = NetworkGetEntityFromNetworkId(id);
 
-		return new NetVehicle(entity);
+		return this.getByScriptId(entity);
 	}
 
 	protected _stateBag: StateBagInterface;
 
-	constructor(private _scriptID: number) {
+	private readonly _scriptID: number;
+
+	constructor(scriptID: number) {
 		super();
 
-		this._stateBag = Entity(this.scriptID).state;
+		this._scriptID = scriptID;
+
+		this._stateBag = Entity(scriptID).state;
 	}
 
-	get scriptID(): number {
+	get scriptID() {
 		return this._scriptID;
 	}
 

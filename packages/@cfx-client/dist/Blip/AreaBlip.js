@@ -2,13 +2,10 @@ import { Blip } from './Blip';
 export class AreaBlip extends Blip {
     _width = 0;
     _height = 0;
-    constructor(position, width, height, remoteId = -1) {
-        super(position, remoteId);
+    constructor(position, width, height) {
+        super(AddBlipForArea(position.x, position.y, position.z, width, height));
         this._width = width;
         this._height = height;
-    }
-    createBlip() {
-        return AddBlipForArea(this.position.x, this.position.y, this.position.z, this._width, this._height);
     }
     setAreaSize(width, height) {
         this._width = width;

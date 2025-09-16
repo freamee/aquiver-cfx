@@ -39,10 +39,14 @@ export class NetProp extends NetEntity {
 
 	protected _stateBag: StateBagInterface;
 
-	constructor(private _scriptID: number) {
+	private readonly _scriptID: number;
+
+	constructor(scriptID: number) {
 		super();
 
-		this._stateBag = Entity(this._scriptID).state;
+		this._scriptID = scriptID;
+
+		this._stateBag = Entity(scriptID).state;
 	}
 
 	get scriptID(): number {

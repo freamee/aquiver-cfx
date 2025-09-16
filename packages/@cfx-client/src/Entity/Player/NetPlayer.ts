@@ -58,10 +58,6 @@ export class NetPlayer extends NetEntity {
 		return NetPed.getByScriptId(this.scriptID);
 	}
 
-	get dimension() {
-		return this.getStateBag<number>('PLAYER_DIMENSION') ?? 0;
-	}
-
 	get source() {
 		return Number(this._source);
 	}

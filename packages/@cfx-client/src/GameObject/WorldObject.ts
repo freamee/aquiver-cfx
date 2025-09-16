@@ -2,14 +2,8 @@ import { Vector3 } from '@aquiver-cfx/shared';
 import { BaseObject } from './BaseObject';
 
 export abstract class WorldObject extends BaseObject {
-	private _position: Vector3;
-	private _dimension: number;
-
-	protected constructor(position: Vector3, remoteId: number = -1) {
-		super(remoteId);
-
-		this._position = position;
-		this._dimension = 0;
+	protected constructor() {
+		super();
 	}
 
 	distanceTo(position: Vector3): number {
@@ -20,29 +14,6 @@ export abstract class WorldObject extends BaseObject {
 		return this.distanceTo(position) <= distance;
 	}
 
-	get streamingDistance() {
-		return -1;
-	}
-
-	get dimension() {
-		return this._dimension;
-	}
-
-	set dimension(value: number) {
-		const oldValue = this._dimension;
-
-		this._dimension = value;
-
-		if (oldValue !== value) {
-			emit('dimensionChange', this.id, value, oldValue);
-		}
-	}
-
-	get position() {
-		return this._position;
-	}
-
-	set position(pos: Vector3) {
-		this._position = pos;
-	}
+	abstract get position(): Vector3;
+	abstract set position(pos: Vector3);
 }

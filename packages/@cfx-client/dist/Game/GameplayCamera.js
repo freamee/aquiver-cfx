@@ -20,4 +20,13 @@ export class GameplayCamera {
     static set relativeHeading(heading) {
         SetGameplayCamRelativeHeading(heading);
     }
+    static get forwardVector() {
+        const rot = this.rotation;
+        const pitch = rot.x * (Math.PI / 180);
+        const yaw = rot.z * (Math.PI / 180);
+        const x = -Math.sin(yaw) * Math.cos(pitch);
+        const y = Math.cos(yaw) * Math.cos(pitch);
+        const z = Math.sin(pitch);
+        return new Vector3(x, y, z);
+    }
 }

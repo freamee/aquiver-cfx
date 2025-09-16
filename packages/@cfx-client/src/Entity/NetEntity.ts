@@ -2,12 +2,12 @@ import { Quaternion, Vector3 } from '@aquiver-cfx/shared';
 import { WorldObject } from '../GameObject';
 
 export abstract class NetEntity extends WorldObject {
-	abstract get scriptID(): number;
-
 	protected abstract _stateBag: StateBagInterface;
 
+	abstract get scriptID(): number;
+
 	protected constructor() {
-		super(new Vector3());
+		super();
 	}
 
 	setStateBag<T = unknown>(key: string, value: T, replicated: boolean) {
@@ -120,6 +120,64 @@ export abstract class NetEntity extends WorldObject {
 		return id;
 	}
 
+	attachToEntity(
+		entity: NetEntity,
+		boneIndex: number,
+		offset: Vector3 = new Vector3(),
+		rotation: Vector3 = new Vector3(),
+		collision: boolean = false,
+		fixedRot: boolean = true
+	) {
+		AttachEntityToEntity(
+			this.scriptID,
+			entity.scriptID,
+			boneIndex,
+			offset.x,
+			offset.y,
+			offset.z,
+			rotation.x,
+			rotation.y,
+			rotation.z,
+			false,
+			false,
+			collision,
+			false,
+			2,
+			fixedRot
+		);
+	}
+
+	attachToEntityPhysically(
+		entity: NetEntity,
+		boneIndex: number,
+		offset: Vector3 = new Vector3(),
+		rotation: Vector3 = new Vector3(),
+		collision: boolean = false,
+		fixedRot: boolean = true
+	) {
+		AttachEntityToEntityPhysically(
+			this.scriptID,
+			entity.scriptID,
+			-1,
+			boneIndex,
+			0.0,
+			0.0,
+			0.0,
+			offset.x,
+			offset.y,
+			offset.z,
+			rotation.x,
+			rotation.y,
+			rotation.z,
+			0.0,
+			fixedRot,
+			true,
+			collision,
+			false,
+			2
+		);
+	}
+
 	isNetOwner(playerIndex: number) {
 		return this.netOwner === playerIndex;
 	}
@@ -203,38 +261,91 @@ export abstract class NetEntity extends WorldObject {
 	}
 
 	get matrix() {
-		const [forward, right, up] = GetEntityMatrix(this.scriptID);
+		const [forward, right, up, position] = GetEntityMatrix(this.scriptID);
 
 		return {
 			forward: new Vector3(...forward),
 			right: new Vector3(...right),
-			up: new Vector3(...up)
+			up: new Vector3(...up),
+			position: new Vector3(...position)
 		};
 	}
 
+	set matrixForward(forward: Vector3) {
+		const mat = this.matrix;
+
+		SetEntityMatrix(
+			this.scriptID,
+			forward.x,
+			forward.y,
+			forward.z,
+			mat.right.x,
+			mat.right.y,
+			mat.right.z,
+			mat.up.x,
+			mat.up.y,
+			mat.up.z,
+			mat.position.x,
+			mat.position.y,
+			mat.position.z
+		);
+	}
+
+	set matrixRight(right: Vector3) {
+		const mat = this.matrix;
+
+		SetEntityMatrix(
+			this.scriptID,
+			mat.forward.x,
+			mat.forward.y,
+			mat.forward.z,
+			right.x,
+			right.y,
+			right.z,
+			mat.up.x,
+			mat.up.y,
+			mat.up.z,
+			mat.position.x,
+			mat.position.y,
+			mat.position.z
+		);
+	}
+
+	set matrixUp(up: Vector3) {
+		const mat = this.matrix;
+
+		SetEntityMatrix(
+			this.scriptID,
+			mat.forward.x,
+			mat.forward.y,
+			mat.forward.z,
+			mat.right.x,
+			mat.right.y,
+			mat.right.z,
+			up.x,
+			up.y,
+			up.z,
+			mat.position.x,
+			mat.position.y,
+			mat.position.z
+		);
+	}
+
 	get position() {
-		if (this.isValid) {
-			const [x, y, z] = GetEntityCoords(this.scriptID, true);
+		const [x, y, z] = GetEntityCoords(this.scriptID, true);
 
-			return new Vector3(x, y, z);
-		}
-
-		return super.position;
+		return new Vector3(x, y, z);
 	}
 
 	set position(pos: Vector3) {
-		super.position = pos;
-
 		SetEntityCoords(this.scriptID, pos.x, pos.y, pos.z, true, true, false, false);
 	}
 
 	get positionNoOffset() {
-		return super.position;
+		return this.position;
 	}
 
 	set positionNoOffset(pos: Vector3) {
-		super.position = pos;
-
 		SetEntityCoordsNoOffset(this.scriptID, pos.x, pos.y, pos.z, true, true, false);
 	}
 
@@ -296,6 +407,14 @@ export abstract class NetEntity extends WorldObject {
 
 	toggleCollision(toggle: boolean, keepPhysics: boolean) {
 		SetEntityCollision(this.scriptID, toggle, keepPhysics);
+	}
+
+	activatePhysics() {
+		ActivatePhysics(this.scriptID);
+	}
+
+	hasPhysics() {
+		return !!DoesEntityHavePhysics(this.scriptID);
 	}
 
 	set hasGravity(state: boolean) {
