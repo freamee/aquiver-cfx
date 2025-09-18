@@ -1,4 +1,4 @@
-import { RPC } from './rpc';
+import { RPC } from './RPC';
 
 export * from '@aquiver-cfx/shared';
 
