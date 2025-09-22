@@ -181,8 +181,8 @@ export class Graphics {
         const drawColor = isHover ? new RGBA(35, 35, 35, 225) : new RGBA(25, 25, 25, 225);
         DrawRect(position.x, position.y, width, height, drawColor.r, drawColor.g, drawColor.b, drawColor.a);
         if (options.sprite) {
-            const [dictionary, name] = options.sprite;
-            this.drawSprite(dictionary, name, position, 0.55);
+            const [dictionary, name, scale, color] = options.sprite;
+            this.drawSprite(dictionary, name, position, scale ?? 0.55, color);
         }
         if (isHover) {
             if (options.text) {

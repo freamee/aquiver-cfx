@@ -1,6 +1,6 @@
 import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 type ClickpointOptions = {
-    sprite: [string, string];
+    sprite: [dictionary: string, name: string, scale?: number, color?: RGBA];
     text: string;
 };
 export declare abstract class Graphics {
