@@ -1,7 +1,7 @@
 type tRpcRequest = (...args: any[]) => void;
 
 export class RPC {
-	private events = new Map<string, (source: number | string, ...args: any[]) => any>();
+	private events = new Map<string, (source: number, ...args: any[]) => any>();
 	private pendingRequests = new Map<string, tRpcRequest>();
 
 	constructor() {
@@ -9,7 +9,7 @@ export class RPC {
 		onNet('rpc:serverRequest', this.handleRequest.bind(this));
 	}
 
-	onRpc(rpcName: string, callback: (source: number | string, ...args: any[]) => void) {
+	onRpc(rpcName: string, callback: (source: number, ...args: any[]) => void) {
 		if (this.events.has(rpcName)) {
 			throw new Error(`onRpc already registered: ${rpcName}`);
 		}
@@ -40,31 +40,28 @@ export class RPC {
 		});
 	}
 
-	private async handleRequest(
-		source: number | string,
-		id: string,
-		rpcName: string,
-		...args: any[]
-	) {
+	private async handleRequest(id: string, rpcName: string, ...args: any[]) {
+		const _source = source;
+
 		const callback = this.events.get(rpcName);
 
 		if (typeof callback !== 'function') {
-			emitNet('rpc:clientResponse', source, id, false);
+			emitNet('rpc:clientResponse', _source, id, false);
 			return;
 		}
 
 		try {
-			const response = await callback(source, ...args);
+			const response = await callback(_source, ...args);
 
-			emitNet('rpc:clientResponse', source, id, true, response);
+			emitNet('rpc:clientResponse', _source, id, true, response);
 		} catch (error) {
 			console.error(error);
 
-			emitNet('rpc:clientResponse', source, id, false);
+			emitNet('rpc:clientResponse', _source, id, false);
 		}
 	}
 
-	private async handleResponse(source: number | string, id: string, success: boolean, data: any) {
+	private async handleResponse(id: string, success: boolean, data: any) {
 		const resolve = this.pendingRequests.get(id);
 
 		if (resolve) {

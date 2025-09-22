@@ -2,7 +2,7 @@ import { RGBA, Vector2, Vector3 } from '@aquiver-cfx/shared';
 import { GameplayCamera } from './GameplayCamera';
 
 type ClickpointOptions = {
-	sprite: [string, string];
+	sprite: [dictionary: string, name: string, scale?: number, color?: RGBA];
 	text: string;
 };
 
@@ -374,9 +374,9 @@ export abstract class Graphics {
 		);
 
 		if (options.sprite) {
-			const [dictionary, name] = options.sprite;
+			const [dictionary, name, scale, color] = options.sprite;
 
-			this.drawSprite(dictionary, name, position, 0.55);
+			this.drawSprite(dictionary, name, position, scale ?? 0.55, color);
 		}
 
 		if (isHover) {
