@@ -19,7 +19,7 @@ export function locale(key: string, ...args: any[]) {
 		return printf(value, ...args);
 	}
 
-	return key;
+	return value;
 }
 
 function flatten(obj: Record<string, any>, prefix = ''): Record<string, string> {
