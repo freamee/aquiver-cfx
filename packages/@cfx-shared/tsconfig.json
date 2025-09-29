@@ -20,7 +20,7 @@
 		"noImplicitReturns": false,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"types": ["@types/node"],
+		"types": ["@citizenfx/server", "@citizenfx/client", "@types/node"],
 		"outDir": "./dist"
 	},
 	"include": ["src/**/*.ts"]

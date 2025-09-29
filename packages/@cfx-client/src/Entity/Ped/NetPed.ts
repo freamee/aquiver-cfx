@@ -23,6 +23,33 @@ export class NetPed extends NetEntity {
 		this._stateBag = Entity(scriptID).state;
 	}
 
+	taskPlayAnim(
+		dictionary: string,
+		animationName: string,
+		blendInSpeed: number,
+		blendOutSpeed: number,
+		duration: number,
+		flag: number
+	) {
+		TaskPlayAnim(
+			this._scriptID,
+			dictionary,
+			animationName,
+			blendInSpeed,
+			blendOutSpeed,
+			duration,
+			flag,
+			1.0,
+			false,
+			false,
+			false
+		);
+	}
+
+	stopAnimTask(dictionary: string, animationName: string) {
+		StopAnimTask(this._scriptID, dictionary, animationName, 1.0);
+	}
+
 	get scriptID() {
 		return this._scriptID;
 	}
