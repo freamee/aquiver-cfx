@@ -26,5 +26,8 @@
 		"tsc": "tsc",
 		"watch": "tsc --watch"
 	},
-	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed"
+	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed",
+	"dependencies": {
+		"fast-printf": "^1.6.10"
+	}
 }
