@@ -4,7 +4,7 @@ const resourceName: string = GetCurrentResourceName();
 
 const keys = new Map<string, string>();
 
-export function _f(key: string, ...args: any[]) {
+export function locale(key: string, ...args: any[]) {
 	const value = keys.get(key);
 
 	if (!value) {
