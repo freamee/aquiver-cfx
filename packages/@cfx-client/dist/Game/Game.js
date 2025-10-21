@@ -12,6 +12,9 @@ export class Game {
     static get frameCount() {
         return GetFrameCount();
     }
+    static get deltaTime() {
+        return GetFrameTime();
+    }
     static get FPS() {
         return 1 / this.lastFrameTime;
     }
