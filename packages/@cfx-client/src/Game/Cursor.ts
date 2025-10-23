@@ -77,7 +77,7 @@ class Cursor {
 				if (this._cursor !== 0) {
 					this._cursor = 0;
 
-					SetNuiFocus(true, false);
+					SetNuiFocus(false, false);
 					SetNuiFocusKeepInput(false);
 				}
 			}
