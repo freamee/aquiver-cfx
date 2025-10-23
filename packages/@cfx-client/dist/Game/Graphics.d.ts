@@ -31,6 +31,10 @@ export declare abstract class Graphics {
     static drawSprite3D(textureDict: string, textureName: string, position: Vector3, scale?: number, color?: RGBA): void;
     static drawSprite(textureDict: string, textureName: string, position: Vector2, scale?: number, color?: RGBA): void;
     static drawClickPoint3D(position: Vector3, scale: number | undefined, onClick: () => void, options?: Partial<ClickpointOptions>): void;
+    static drawInteractions2D(basePos: Vector2, items: Array<{
+        options: ClickpointOptions;
+        action: () => void;
+    }>, spacing?: number): void;
     static drawClickPoint2D(position: Vector2, scale: number | undefined, onClick: () => void, options?: Partial<ClickpointOptions>): void;
     /** Returns the screen coords. (0.0 <-> 1.0) */
     static getScreenFromWorld(position: Vector3): {

@@ -165,6 +165,7 @@ export class Graphics {
             return;
         this.drawClickPoint2D(screenPosition, scale, onClick, options);
     }
+    static drawInteractions2D(basePos, items, spacing = 0.05) { }
     static drawClickPoint2D(position, scale = 0.02, onClick, options = {}) {
         const aspectRatio = GetScreenAspectRatio(false);
         const width = scale / aspectRatio;
