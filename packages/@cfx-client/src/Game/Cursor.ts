@@ -16,7 +16,7 @@ class Cursor {
 			() => {
 				this.visible = !this.visible;
 			},
-			true
+			false
 		);
 
 		RegisterKeyMapping('toggleCursorState', 'Show / Hide cursor', 'keyboard', 'm');
@@ -78,7 +78,7 @@ class Cursor {
 					this._cursor = 0;
 
 					SetNuiFocus(true, false);
-					SetNuiFocusKeepInput(true);
+					SetNuiFocusKeepInput(false);
 				}
 			}
 		}

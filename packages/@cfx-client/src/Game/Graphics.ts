@@ -337,6 +337,15 @@ export abstract class Graphics {
 		this.drawClickPoint2D(screenPosition, scale, onClick, options);
 	}
 
+	static drawInteractions2D(
+		basePos: Vector2,
+		items: Array<{
+			options: ClickpointOptions;
+			action: () => void;
+		}>,
+		spacing: number = 0.05
+	) {}
+
 	static drawClickPoint2D(
 		position: Vector2,
 		scale: number = 0.02,

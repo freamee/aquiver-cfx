@@ -57,3 +57,7 @@ export function initLocale(languageKey: string) {
 		keys.set(k, v);
 	}
 }
+
+export function getLocaleData() {
+	return keys;
+}
