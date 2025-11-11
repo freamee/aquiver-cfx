@@ -12,11 +12,6 @@ export class NetPlayer extends NetEntity {
 		return new NetPlayer(entity);
 	}
 
-	static getByNetId(id: number) {
-		// const entity = NetworkGetEntityFromNetworkId(id)
-		// return this.all.find((i) => i.networkID === id);
-	}
-
 	static getByBagname(bagName: string) {
 		const id = GetPlayerFromStateBagName(bagName);
 
