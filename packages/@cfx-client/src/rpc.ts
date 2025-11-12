@@ -16,11 +16,11 @@ export function onRpc(eventName: string, callback: (...args: any[]) => any) {
 		try {
 			const response = await callback(...args);
 
-			emitNet(`aquiver_cb_${resourceName}`, key, response);
+			emitNet(`aquiver_rpc_${resourceName}`, key, response);
 		} catch (error) {
 			console.error(`Rpc error ${eventName}`, error);
 
-			emitNet(`aquiver_cb_${resourceName}`, key, null);
+			emitNet(`aquiver_rpc_${resourceName}`, key, null);
 		}
 	});
 }

@@ -7,7 +7,7 @@ const resourceName = GetCurrentResourceName();
 /** Flood protection */
 const timestamps = new Map<string, number>();
 const floodProtection = true;
-const floodMs = 250;
+const floodMs = 500;
 
 onNet(`aquiver_rpc_${resourceName}`, (key: string, ...args: any[]) => {
 	const callback = callbacks.get(key);
@@ -34,11 +34,11 @@ export function onRpc(eventName: string, callback: (playerSource: number, ...arg
 		try {
 			const response = await callback(incomingSource, ...args);
 
-			emitNet(`aquiver_cb_${resourceName}`, incomingSource, key, response);
+			emitNet(`aquiver_rpc_${resourceName}`, incomingSource, key, response);
 		} catch (error) {
 			console.error(`Rpc error ${eventName}`, error);
 
-			emitNet(`aquiver_cb_${resourceName}`, incomingSource, key, null);
+			emitNet(`aquiver_rpc_${resourceName}`, incomingSource, key, null);
 		}
 	});
 }
