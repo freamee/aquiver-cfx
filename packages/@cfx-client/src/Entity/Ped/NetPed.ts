@@ -50,6 +50,10 @@ export class NetPed extends NetEntity {
 		StopAnimTask(this._scriptID, dictionary, animationName, 1.0);
 	}
 
+	isPlayingAnim(dictionary: string, animationName: string) {
+		return IsEntityPlayingAnim(this.scriptID, dictionary, animationName, 3);
+	}
+
 	get scriptID() {
 		return this._scriptID;
 	}
