@@ -6,5 +6,6 @@ export * from './Game';
 export * from './Entity';
 export * from './GameObject';
 export * from './Input';
+export * from './rpc';
 const mp = new MultiplayerManager();
 export default mp;
