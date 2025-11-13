@@ -7,5 +7,6 @@ export * from './Entity';
 export * from './GameObject';
 export * from './Input';
 export * from './rpc';
+export * from './EventBridge';
 declare const mp: MultiplayerManager;
 export default mp;

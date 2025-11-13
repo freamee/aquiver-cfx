@@ -9,6 +9,7 @@ export * from './Entity';
 export * from './GameObject';
 export * from './Input';
 export * from './rpc';
+export * from './EventBridge';
 
 const mp = new MultiplayerManager();
 

@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"declaration": true,
+		"noUncheckedIndexedAccess": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"allowSyntheticDefaultImports": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noImplicitReturns": false,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"types": ["@types/node"],
+		"outDir": "./dist"
+	},
+	"include": ["src/**/*.ts"]
+}

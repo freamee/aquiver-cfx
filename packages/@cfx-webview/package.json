@@ -1,0 +1,33 @@
+{
+	"name": "@aquiver-cfx/webview",
+	"version": "1.0.0",
+	"author": "freamee",
+	"license": "ISC",
+	"description": "",
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"keywords": [
+		"fivem",
+		"wrapper",
+		"javascript",
+		"typescript",
+		"citizenfx"
+	],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"clean": "rimraf dist",
+		"build": "npm run clean && npm run tsc",
+		"tsc": "tsc",
+		"watch": "tsc --watch"
+	},
+	"dependencies": {
+		"@aquiver-cfx/shared": "^1.1.10"
+	},
+	"gitHead": "7434601752bd23936f4e77a18ab5aee200af35ed"
+}
