@@ -1,12 +1,8 @@
 type tFunction = (...args: any[]) => void;
 
-let resourceName: string = 'UNKNOWN_PLATFORM';
-
-// @ts-ignore
-if (typeof GetCurrentResourceName === 'function') {
+const resourceName =
 	// @ts-ignore
-	resourceName = GetCurrentResourceName();
-}
+	typeof GetParentResourceName === 'function' ? GetParentResourceName() : 'unknown_resource';
 
 const eventsMap = new Map<string, Set<tFunction>>();
 

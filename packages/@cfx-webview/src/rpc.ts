@@ -6,13 +6,10 @@ type tCallbackFunction = (...args: any[]) => void;
 
 const callbacks = new Map<string, tCallbackFunction>();
 const maxTimeout = 30000;
-let resourceName: string = 'UNKNOWN_PLATFORM';
-
 // @ts-ignore
-if (typeof GetCurrentResourceName === 'function') {
+const resourceName =
 	// @ts-ignore
-	resourceName = GetCurrentResourceName();
-}
+	typeof GetParentResourceName === 'function' ? GetParentResourceName() : 'unknown_resource';
 
 window.addEventListener('message', (event) => {
 	const { data } = event;
