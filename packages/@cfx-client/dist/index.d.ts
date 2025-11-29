@@ -8,5 +8,6 @@ export * from './GameObject';
 export * from './Input';
 export * from './rpc';
 export * from './EventBridge';
+export * from './DUI';
 declare const mp: MultiplayerManager;
 export default mp;

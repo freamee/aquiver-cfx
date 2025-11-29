@@ -29,6 +29,24 @@ export abstract class GameplayCamera {
 		SetGameplayCamRelativeHeading(heading);
 	}
 
+	static get direction() {
+		const rotation = this.rotation;
+
+		const adjustedRotation = {
+			x: (Math.PI / 180) * rotation.x,
+			y: (Math.PI / 180) * rotation.y,
+			z: (Math.PI / 180) * rotation.z
+		};
+
+		const direction = {
+			x: -Math.sin(adjustedRotation.z) * Math.abs(Math.cos(adjustedRotation.x)),
+			y: Math.cos(adjustedRotation.z) * Math.abs(Math.cos(adjustedRotation.x)),
+			z: Math.sin(adjustedRotation.x)
+		};
+
+		return new Vector3(direction.x, direction.y, direction.z);
+	}
+
 	static get forwardVector() {
 		const rot = this.rotation;
 		const pitch = rot.x * (Math.PI / 180);

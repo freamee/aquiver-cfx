@@ -11,19 +11,29 @@ onNet(`aquiver_rpc_${resourceName}`, (key: string, ...args: any) => {
 	resolve(...args);
 });
 
-export function onRpc(eventName: string, callback: (...args: any[]) => any) {
-	onNet(`aquiver_rpc_${eventName}`, async (key: string, ...args: any[]) => {
+export function onRpcView(eventName: string, callback: (...args: any[]) => any) {
+	RegisterNuiCallback(eventName, async (data: any, cb: Function) => {
 		try {
-			const response = await callback(...args);
+			const result = await callback(...(data.args ?? []));
 
-			emitNet(`aquiver_rpc_${resourceName}`, key, response);
+			cb({
+				success: true,
+				data: result
+			});
 		} catch (error) {
-			console.error(`Rpc error ${eventName}`, error);
-
-			emitNet(`aquiver_rpc_${resourceName}`, key, null);
+			cb({
+				success: false,
+				data: []
+			});
 		}
 	});
 }
+
+onRpcView('rpc:call', async (name: string, ...args: any[]) => {
+	const response = await emitRpc(name, ...args);
+
+	return response;
+});
 
 export function emitRpc<T = unknown>(eventName: string, ...args: any[]): Promise<T> | void {
 	let key: string;

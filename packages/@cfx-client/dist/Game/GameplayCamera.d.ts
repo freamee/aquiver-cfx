@@ -6,5 +6,6 @@ export declare abstract class GameplayCamera {
     static set relativePitch(pitch: number);
     static get relativeHeading(): number;
     static set relativeHeading(heading: number);
+    static get direction(): Vector3;
     static get forwardVector(): Vector3;
 }

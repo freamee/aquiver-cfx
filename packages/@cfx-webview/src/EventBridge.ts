@@ -13,7 +13,7 @@ window.addEventListener('message', (event) => {
 
 	if (callbacks.size > 0) {
 		for (const cb of callbacks) {
-			cb(data.args);
+			cb(...data.args);
 		}
 	}
 });
@@ -51,7 +51,9 @@ async function emit<T = unknown>(eventName: string, ...args: any[]): Promise<T> 
 
 		const result = await response.json();
 
-		if (!result.success) return Promise.reject(`Rpc emit failed: ${eventName}`);
+		if (!result.success) {
+			return Promise.reject(`Rpc emit failed: ${eventName}`);
+		}
 
 		return Promise.resolve(result.data);
 	} catch (error) {
@@ -59,6 +61,10 @@ async function emit<T = unknown>(eventName: string, ...args: any[]): Promise<T> 
 	}
 }
 
+async function emitServer<T = unknown>(eventName: string, ...args: any[]): Promise<T> {
+	return emit('rpc:call', eventName, ...args);
+}
+
 export function useEvent() {
-	return { on, off, emit };
+	return { on, off, emit, emitServer };
 }
