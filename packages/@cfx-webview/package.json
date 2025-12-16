@@ -1,6 +1,6 @@
 {
 	"name": "@aquiver-cfx/webview",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"author": "freamee",
 	"license": "ISC",
 	"description": "",
@@ -27,7 +27,7 @@
 		"watch": "tsc --watch"
 	},
 	"dependencies": {
-		"@aquiver-cfx/shared": "^1.2.5"
+		"@aquiver-cfx/shared": "^1.2.9"
 	},
-	"gitHead": "93f9358ac1439973911638b2c5455de46faba1a1"
+	"gitHead": "552c6c1483b3d150baa5e597c6e97ac6e7116024"
 }
