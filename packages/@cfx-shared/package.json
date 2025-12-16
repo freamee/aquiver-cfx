@@ -1,6 +1,6 @@
 {
 	"name": "@aquiver-cfx/shared",
-	"version": "1.2.10",
+	"version": "1.3.0",
 	"author": "freamee",
 	"license": "ISC",
 	"description": "",
@@ -26,7 +26,7 @@
 		"tsc": "tsc",
 		"watch": "tsc --watch"
 	},
-	"gitHead": "a2a1b8c989a02578a9461f3aa1e0b5de9d2967f0",
+	"gitHead": "7db0facde3532e67b05d328f8612b6f01ee9438e",
 	"dependencies": {
 		"fast-printf": "^1.6.10"
 	}
