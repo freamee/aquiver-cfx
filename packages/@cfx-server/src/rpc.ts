@@ -2,15 +2,18 @@ const resourceName = GetCurrentResourceName();
 
 /** Flood protection */
 const timestamps = new Map<string, number>();
-const floodProtection = true;
 const floodMs = 500;
 
-export function onRpc(eventName: string, callback: (playerSource: number, ...args: any[]) => void) {
+export function onRpc(
+	eventName: string,
+	callback: (playerSource: number, ...args: any[]) => void,
+	floodProtectionTime: number = floodMs
+) {
 	onNet(`aquiver_rpc_${eventName}`, async (key: string, ...args: any[]) => {
 		const incomingSource = source;
 		const floodKey = `${incomingSource}:${eventName}`;
 
-		if (floodProtection) {
+		if (floodProtectionTime > 0) {
 			const now = Date.now();
 			const lastCall = timestamps.get(floodKey) ?? 0;
 			if (now - lastCall < floodMs) return;

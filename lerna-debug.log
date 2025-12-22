@@ -1,0 +1,8 @@
+48 error Error: Command failed with exit code 128: git tag v1.3.0 -m v1.3.0
+48 error fatal: tag 'v1.3.0' already exists
+48 error     at makeError (C:\Users\Gamer PC\Documents\GitHub\aquiver-cfx\node_modules\execa\lib\error.js:59:11)
+48 error     at handlePromise (C:\Users\Gamer PC\Documents\GitHub\aquiver-cfx\node_modules\execa\index.js:114:26)
+48 error     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+48 error     at async VersionCommand.gitCommitAndTagVersion (C:\Users\Gamer PC\Documents\GitHub\aquiver-cfx\node_modules\lerna\dist\index.js:10151:9)
+48 error     at async VersionCommand.commitAndTagUpdates (C:\Users\Gamer PC\Documents\GitHub\aquiver-cfx\node_modules\lerna\dist\index.js:10116:18)
+48 error     at async Promise.all (index 0)
